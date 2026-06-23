@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates & Assets | Creatnprocess</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== ASSETS PAGE STYLES ===== */
+        .assets-header {
+            text-align: center;
+            padding: 60px 0 20px;
+        }
+        .assets-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 10px;
+        }
+        .assets-header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .assets-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .assets-stats .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .assets-stats .stat-box:hover {
+            transform: translateY(-4px);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .assets-stats .stat-box .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .assets-stats .stat-box .stat-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .asset-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0 40px;
+        }
+        .asset-filters button {
+            padding: 10px 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--muted);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .asset-filters button:hover,
+        .asset-filters button.active {
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .asset-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .asset-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        .asset-card.hidden {
+            display: none;
+        }
+
+        .asset-card .asset-preview {
+            height: 200px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            font-size: 3rem;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .asset-card .asset-preview .asset-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .asset-card .asset-preview:hover .asset-overlay {
+            opacity: 1;
+        }
+        .asset-card .asset-preview .asset-overlay .preview-btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .asset-card .asset-preview .asset-overlay .preview-btn:hover {
+            transform: scale(1.05);
+        }
+        .asset-card .asset-preview .file-type {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .asset-card .asset-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .asset-badge.free {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+        .asset-badge.premium {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+        .asset-badge.pro {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--a);
+        }
+
+        .asset-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 6px;
+        }
+        .asset-card .asset-meta {
+            display: flex;
+            gap: 16px;
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin: 8px 0 12px;
+            flex-wrap: wrap;
+        }
+        .asset-card .asset-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .asset-card p {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.9rem;
+            margin: 0 0 16px;
+        }
+        .asset-card .asset-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .asset-card .asset-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .asset-card .asset-price.free-price {
+            background: none;
+            -webkit-text-fill-color: #4ade80;
+            color: #4ade80;
+        }
+        .asset-card .btn-download {
+            padding: 10px 24px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .asset-card .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+        .asset-card .btn-download:active {
+            transform: scale(0.95);
+        }
+        .asset-card .btn-download.downloaded {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            cursor: default;
+        }
+        .asset-card .btn-download.downloaded:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .asset-card .featured-tag {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(90deg, #f59e0b, #f97316);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+        .asset-card .featured-tag.new {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+        .asset-card .featured-tag.popular {
+            background: linear-gradient(90deg, #ec4899, #f43f5e);
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 28px;
+            border-radius: 16px;
+            background: rgba(6, 8, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast .toast-icon {
+            margin-right: 10px;
+        }
+        .toast.success {
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        .toast.success .toast-icon {
+            color: #4ade80;
+        }
+        .toast.error {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .toast.error .toast-icon {
+            color: #f87171;
+        }
+        .toast.info {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        .toast.info .toast-icon {
+            color: #60a5fa;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+            display: none;
+        }
+        .no-results.show {
+            display: block;
+        }
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        @media (max-width: 900px) {
+            .assets-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .assets-grid {
+                grid-template-columns: 1fr;
+            }
+            .toast {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                max-width: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .assets-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .assets-stats .stat-box {
+                padding: 16px;
+            }
+            .assets-stats .stat-box .stat-number {
+                font-size: 1.6rem;
+            }
+            .asset-filters button {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            .asset-card .asset-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .asset-card .btn-download {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== CURSOR GLOW ===== -->
+    <div class="cursor-glow"></div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-message">Action completed!</span>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="nav">
+        <div class="brand">Creatnprocess</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="assets.html" style="color:var(--a);">Assets</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#showcase">Portfolio</a>
+            <a href="founder.html">About</a>
+            <a href="checkout.html">Checkout</a>
+        </div>
+    </nav>
+
+    <section class="section">
+        <!-- Header -->
+        <div class="assets-header reveal">
+            <h1>📦 Templates & Assets</h1>
+            <p>Premium design resources, templates, mockups, and creative assets to supercharge your workflow.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="assets-stats reveal">
+            <div class="stat-box">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Total Assets</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">45+</div>
+                <div class="stat-label">Free Templates</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">12K+</div>
+                <div class="stat-label">Downloads</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">4.9⭐</div>
+                <div class="stat-label">User Rating</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="asset-filters reveal" id="filterContainer">
+            <button class="active" data-filter="all">All Assets</button>
+            <button data-filter="templates">Templates</button>
+            <button data-filter="mockups">Mockups</button>
+            <button data-filter="presets">Presets</button>
+            <button data-filter="fonts">Fonts</button>
+            <button data-filter="free">Free</button>
+            <button data-filter="premium">Premium</button>
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <h3>🔍 No assets found</h3>
+            <p>Try adjusting your filters to find what you're looking for.</p>
+        </div>
+
+        <!-- Assets Grid -->
+        <div class="assets-grid reveal" id="assetsGrid"></div>
+
+        <!-- Call to Action -->
+        <div style="text-align:center;margin-top:60px;padding:50px;background:rgba(255,255,255,0.02);border-radius:24px;border:1px solid rgba(255,255,255,0.06);">
+            <h2 style="margin-bottom:12px;">Want More Premium Assets?</h2>
+            <p style="color:var(--muted);max-width:600px;margin:0 auto 24px;">Get access to our complete library of 150+ premium templates, mockups, and design resources.</p>
+            <button class="btn primary" onclick="showToast('🚀 Premium bundle coming soon!', 'info')" style="border:none;cursor:pointer;">Get Premium Bundle</button>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 Creatnprocess. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ============================================================
+        // ASSETS DATA
+        // ============================================================
+        const assets = [{
+            id: 1,
+            title: "Brand Identity Template Kit",
+            category: "templates",
+            type: "premium",
+            price: 29,
+            icon: "🏷️",
+            format: "AI, PSD",
+            size: "12MB",
+            downloads: 1240,
+            description: "Complete brand identity template with logo, business card, letterhead, and brand guidelines.",
+            featured: true,
+            featuredType: "popular"
+        }, {
+            id: 2,
+            title: "Social Media Post Templates",
+            category: "templates",
+            type: "free",
+            price: 0,
+            icon: "📱",
+            format: "PSD",
+            size: "8MB",
+            downloads: 3200,
+            description: "50+ social media post templates for Instagram, Facebook, and Twitter. Fully customizable.",
+            featured: true,
+            featuredType: "new"
+        }, {
+            id: 3,
+            title: "Product Mockup Generator",
+            category: "mockups",
+            type: "premium",
+            price: 19,
+            icon: "📦",
+            format: "PSD",
+            size: "45MB",
+            downloads: 890,
+            description: "Smart object product mockup generator with 20+ different product placements.",
+            featured: false,
+            featuredType: null
+        }, {
+            id: 4,
+            title: "Lightroom Preset Pack",
+            category: "presets",
+            type: "premium",
+            price: 15,
+            icon: "🎨",
+            format: "XMP, DNG",
+            size: "2MB",
+            downloads: 2100,
+            description: "50 professional Lightroom presets for portrait, landscape, and street photography.",
+            featured: true,
+            featuredType: "popular"
+        }, {
+            id: 5,
+            title: "Typography Font Bundle",
+            category: "fonts",
+            type: "free",
+            price: 0,
+            icon: "🔤",
+            format: "OTF, TTF",
+            size: "6MB",
+            downloads: 4500,
+            description: "15 premium quality fonts for your design projects. Includes serif, sans-serif, and display fonts.",
+            featured: false,
+            featuredType: null
+        }, {
+            id: 6,
+            title: "UI/UX Design Templates",
+            category: "templates",
+            type: "premium",
+            price: 25,
+            icon: "💻",
+            format: "Figma, XD",
+            size: "18MB",
+            downloads: 980,
+            description: "Complete UI/UX design templates for mobile apps and web applications. Fully responsive.",
+            featured: false,
+            featuredType: null
+        }, {
+            id: 7,
+            title: "Magazine Mockup Set",
+            category: "mockups",
+            type: "free",
+            price: 0,
+            icon: "📰",
+            format: "PSD",
+            size: "32MB",
+            downloads: 1800,
+            description: "10 magazine mockup templates with smart objects. Perfect for portfolio presentations.",
+            featured: false,
+            featuredType: null
+        }, {
+            id: 8,
+            title: "Vintage Film Presets",
+            category: "presets",
+            type: "free",
+            price: 0,
+            icon: "🎞️",
+            format: "XMP",
+            size: "1MB",
+            downloads: 2800,
+            description: "15 vintage film presets for Lightroom and Photoshop. Create stunning retro looks.",
+            featured: true,
+            featuredType: "new"
+        }, {
+            id: 9,
+            title: "Handwritten Script Fonts",
+            category: "fonts",
+            type: "premium",
+            price: 22,
+            icon: "✍️",
+            format: "OTF",
+            size: "4MB",
+            downloads: 760,
+            description: "6 premium handwritten script fonts with multiple styles and alternates.",
+            featured: false,
+            featuredType: null
+        }, {
+            id: 10,
+            title: "Business Card Mockups",
+            category: "mockups",
+            type: "premium",
+            price: 12,
+            icon: "💳",
+            format: "PSD",
+            size: "25MB",
+            downloads: 1500,
+            description: "15 business card mockup templates with different angles and styles.",
+            featured: false,
+            featuredType: null
+        }, {
+            id: 11,
+            title: "YouTube Thumbnail Templates",
+            category: "templates",
+            type: "free",
+            price: 0,
+            icon: "▶️",
+            format: "PSD",
+            size: "10MB",
+            downloads: 5600,
+            description: "30+ YouTube thumbnail templates optimized for click-through rates. Easily customizable.",
+            featured: true,
+            featuredType: "popular"
+        }, {
+            id: 12,
+            title: "Modern Logo Templates",
+            category: "templates",
+            type: "premium",
+            price: 35,
+            icon: "🏷️",
+            format: "AI, EPS",
+            size: "15MB",
+            downloads: 1200,
+            description: "50 modern logo templates with editable colors, fonts, and layouts.",
+            featured: false,
+            featuredType: null
+        }];
+
+        // ============================================================
+        // STATE
+        // ============================================================
+        let downloadedAssets = new Set();
+
+        // ============================================================
+        // TOAST SYSTEM
+        // ============================================================
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const messageEl = toast.querySelector('.toast-message');
+            const iconEl = toast.querySelector('.toast-icon');
+            
+            toast.className = 'toast ' + type;
+            iconEl.textContent = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+            messageEl.textContent = message;
+            
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // ============================================================
+        // DOWNLOAD FUNCTION
+        // ============================================================
+        function downloadAsset(assetId) {
+            const asset = assets.find(a => a.id === assetId);
+            if (!asset) return;
+
+            // Check if already downloaded
+            if (downloadedAssets.has(assetId)) {
+                showToast(`"${asset.title}" is already downloaded!`, 'info');
+                return;
+            }
+
+            // Check if premium and not paid (simulate purchase)
+            if (asset.type === 'premium') {
+                const confirmed = confirm(`💎 "${asset.title}" is a premium asset.\n\nPrice: $${asset.price}\n\nWould you like to purchase and download it now?\n\n(Click OK to simulate purchase)`);
+                if (!confirmed) {
+                    showToast('Download cancelled', 'info');
+                    return;
+                }
+                showToast(`💳 Processing payment for $${asset.price}...`, 'info');
+                
+                // Simulate payment processing
+                setTimeout(() => {
+                    downloadedAssets.add(assetId);
+                    renderAssets();
+                    showToast(`✅ "${asset.title}" downloaded successfully!`, 'success');
+                }, 1500);
+                return;
+            }
+
+            // Free download
+            downloadedAssets.add(assetId);
+            renderAssets();
+            
+            // Simulate download
+            const mockBlob = new Blob(['This is a mock download file for ' + asset.title], { type: 'text/plain' });
+            const url = URL.createObjectURL(mockBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${asset.title.toLowerCase().replace(/ /g, '_')}.${asset.format.split(',')[0].toLowerCase()}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast(`📥 "${asset.title}" downloaded successfully!`, 'success');
+        }
+
+        // ============================================================
+        // RENDER ASSETS
+        // ============================================================
+        function renderAssets(filter = 'all') {
+            const grid = document.getElementById('assetsGrid');
+            const noResults = document.getElementById('noResults');
+            
+            let filteredAssets = assets;
+            
+            if (filter !== 'all') {
+                filteredAssets = assets.filter(a => 
+                    a.category === filter || 
+                    a.type === filter
+                );
+            }
+            
+            if (filteredAssets.length === 0) {
+                noResults.classList.add('show');
+                grid.innerHTML = '';
+                return;
+            }
+            
+            noResults.classList.remove('show');
+            
+            grid.innerHTML = filteredAssets.map(asset => {
+                const isDownloaded = downloadedAssets.has(asset.id);
+                
+                let tags = [];
+                if (asset.featured && asset.featuredType === 'popular') {
+                    tags.push(`<span class="featured-tag popular">🔥 Popular</span>`);
+                } else if (asset.featured && asset.featuredType === 'new') {
+                    tags.push(`<span class="featured-tag new">🆕 New</span>`);
+                }
+                
+                const priceClass = asset.type === 'free' ? 'free-price' : '';
+                const priceDisplay = asset.type === 'free' ? 'Free' : `$${asset.price}`;
+                const badgeClass = asset.type === 'free' ? 'free' : asset.type === 'premium' ? 'premium' : 'pro';
+                
+                let buttonHTML;
+                if (isDownloaded) {
+                    buttonHTML = `<button class="btn-download downloaded" disabled>✅ Downloaded</button>`;
+                } else {
+                    buttonHTML = `<button class="btn-download" onclick="downloadAsset(${asset.id})">📥 Download</button>`;
+                }
+                
+                return `
+                    <div class="asset-card" data-category="${asset.category}" data-type="${asset.type}">
+                        ${tags.join('')}
+                        <span class="asset-badge ${badgeClass}">${asset.type}</span>
+                        <div class="asset-preview">
+                            <span style="font-size:4rem;position:relative;z-index:1;">${asset.icon}</span>
+                            <div class="asset-overlay">
+                                <button class="preview-btn" onclick="downloadAsset(${asset.id})">Quick Download</button>
+                            </div>
+                            <span class="file-type">${asset.format}</span>
+                        </div>
+                        <h3>${asset.title}</h3>
+                        <div class="asset-meta">
+                            <span>📄 ${asset.format}</span>
+                            <span>💾 ${asset.size}</span>
+                            <span>⬇️ ${asset.downloads.toLocaleString()}</span>
+                        </div>
+                        <p>${asset.description}</p>
+                        <div class="asset-footer">
+                            <div class="asset-price ${priceClass}">${priceDisplay}</div>
+                            ${buttonHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ============================================================
+        // FILTER SYSTEM
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.asset-filters button');
+            
+            // Load saved downloads
+            try {
+                const saved = JSON.parse(localStorage.getItem('creatnprocess_downloaded') || '[]');
+                if (Array.isArray(saved)) downloadedAssets = new Set(saved);
+            } catch (e) {}
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    renderAssets(filter);
+                });
+            });
+            
+            // Initial render
+            renderAssets('all');
+            
+            // Save downloads to localStorage
+            setInterval(() => {
+                localStorage.setItem('creatnprocess_downloaded', JSON.stringify([...downloadedAssets]));
+            }, 1000);
+        });
+
+        // ============================================================
+        // EXPOSE FUNCTIONS
+        // ============================================================
+        window.downloadAsset = downloadAsset;
+        window.showToast = showToast;
+
+        console.log('📦 Assets page loaded!');
+        console.log(`📁 ${assets.length} assets available`);
+        console.log(`⬇️ ${downloadedAssets.size} assets downloaded`);
+    </script>
+</body>
+</html>
