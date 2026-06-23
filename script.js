@@ -57,7 +57,6 @@
 
   filterButtons.forEach(function(button) {
     button.addEventListener('click', function() {
-      // Update active button
       filterButtons.forEach(function(btn) {
         btn.classList.remove('active');
       });
@@ -66,7 +65,6 @@
       const filter = this.textContent.toLowerCase();
 
       projects.forEach(function(project) {
-        // Get the category from the image text or data attribute
         const projectText = project.querySelector('.image')?.textContent?.toLowerCase() || '';
         const category = project.dataset.category || '';
 
@@ -114,8 +112,122 @@
     });
   }
 
-  // ---- Console Log ----
+  // ============================================================
+  // ---- NUMBER COUNTING ANIMATION ----
+  // ============================================================
+  
+  // Function to animate counting
+  function animateNumber(element, target, suffix = '', duration = 2000) {
+    const start = 0;
+    const startTime = performance.now();
+    const isFloat = target % 1 !== 0;
+
+    function updateCount(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const current = start + (target - start) * easeOutQuart;
+      
+      if (isFloat) {
+        element.textContent = current.toFixed(1) + suffix;
+      } else {
+        element.textContent = Math.floor(current) + suffix;
+      }
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        // Final value
+        if (isFloat) {
+          element.textContent = target.toFixed(1) + suffix;
+        } else {
+          element.textContent = target + suffix;
+        }
+      }
+    }
+    
+    requestAnimationFrame(updateCount);
+  }
+
+  // Function to extract number from text (handles K+, M+, +, etc.)
+  function parseNumber(text) {
+    const clean = text.replace(/[^0-9.]/g, '');
+    return parseFloat(clean) || 0;
+  }
+
+  // Function to get suffix from text
+  function getSuffix(text) {
+    const match = text.match(/[^0-9.]+$/);
+    return match ? match[0] : '';
+  }
+
+  // Track which stats have been animated
+  const animatedStats = new Set();
+
+  // Observer for stats numbers
+  const statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !animatedStats.has(entry.target)) {
+        animatedStats.add(entry.target);
+        
+        const statElement = entry.target;
+        const originalText = statElement.textContent;
+        const target = parseNumber(originalText);
+        const suffix = getSuffix(originalText);
+        
+        if (target > 0) {
+          animateNumber(statElement, target, suffix, 2000);
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  // Observe all stat numbers
+  document.querySelectorAll('.stat h3').forEach(function(el) {
+    statsObserver.observe(el);
+  });
+
+  // Observe founder stats
+  document.querySelectorAll('.founder-stats .stat-item h3').forEach(function(el) {
+    statsObserver.observe(el);
+  });
+
+  // Observe any other number elements with class .count-animate
+  document.querySelectorAll('.count-animate').forEach(function(el) {
+    statsObserver.observe(el);
+  });
+
+  // ---- Also animate numbers on the founder page stats ----
+  // This will handle stats that might be added dynamically
+  const founderStatsObserver = new MutationObserver(function() {
+    document.querySelectorAll('.founder-stats .stat-item h3:not([data-animated])').forEach(function(el) {
+      el.setAttribute('data-animated', 'true');
+      statsObserver.observe(el);
+    });
+  });
+  
+  // Check for founder stats
+  setTimeout(function() {
+    document.querySelectorAll('.founder-stats .stat-item h3:not([data-animated])').forEach(function(el) {
+      el.setAttribute('data-animated', 'true');
+      statsObserver.observe(el);
+    });
+  }, 500);
+
+  // ---- Also animate numbers in the stats-grid (testimonials, tools, etc.) ----
+  document.querySelectorAll('.stat-card p, .stat-card:not(:has(p))').forEach(function(el) {
+    // Check if the element contains a number
+    const text = el.textContent;
+    if (/\d/.test(text)) {
+      // Only observe if it has a number
+      statsObserver.observe(el);
+    }
+  });
+
   console.log('✅ Creatnprocess - Website loaded successfully!');
   console.log('📋 Navigation: Home | Tutorials | Portfolio | Academy | About | Contact');
   console.log('💡 Design by Creatnprocess Studio');
+  console.log('🔢 Number counting animation enabled!');
 })();
