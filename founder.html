@@ -19,13 +19,23 @@
             max-width: 400px;
             aspect-ratio: 1;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--a), var(--b));
-            display: grid;
-            place-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
+            overflow: hidden;
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.15);
+            transition: all 0.4s ease;
             margin: 0 auto;
+        }
+        .founder-avatar:hover {
+            transform: scale(1.03);
+            border-color: var(--a);
+            box-shadow: 0 0 80px rgba(139, 92, 246, 0.25);
+        }
+        .founder-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
         }
         .founder-info h1 {
             font-size: clamp(2.5rem, 4vw, 3.5rem);
@@ -81,6 +91,20 @@
             font-size: 0.85rem;
             font-weight: 500;
         }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .back-link:hover {
+            color: var(--text);
+        }
+        .back-link span {
+            margin-right: 8px;
+        }
         @media (max-width: 900px) {
             .founder-section {
                 grid-template-columns: 1fr;
@@ -102,30 +126,31 @@
 
     <div class="cursor-glow"></div>
 
- <nav id="nav">
-    <div class="brand">Creatnprocess</div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="blog.html">Blog</a>
-        <a href="index.html#showcase">Portfolio</a>
-        <a href="index.html#academy">Academy</a>
-        <a href="founder.html">About</a>
-        <a href="index.html#contact">Contact</a>
-    </div>
-</nav>
+    <nav id="nav">
+        <div class="brand">Creatnprocess</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tutorials">Tutorials</a>
+            <a href="index.html#showcase">Portfolio</a>
+            <a href="index.html#academy">Academy</a>
+            <a href="founder.html" style="color:var(--a);">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
 
     <section class="section">
         <div class="founder-section reveal">
-            <div class="founder-avatar">Your Photo</div>
+            <div class="founder-avatar">
+                <img src="profile.png" alt="MD Badar Uddin">
+            </div>
             <div class="founder-info">
-                <h1>Your Legal Name</h1>
+                <h1>MD Badar Uddin</h1>
                 <div class="title">Founder & Creative Director</div>
                 <p>
-                    Your Legal Name is the founder of Creatnprocess, a graphic design education platform dedicated to helping designers build real-world skills. With over 10 years of experience in the creative industry, they have taught thousands of students worldwide through practical tutorials, courses, and creative resources.
+                    MD Badar Uddin is the founder of Creatnprocess, a graphic design education platform dedicated to helping designers build real-world skills. With over 10 years of experience in the creative industry, he has taught thousands of students worldwide through practical tutorials, courses, and creative resources.
                 </p>
                 <p>
-                    Their mission is to make professional graphic design education accessible, practical, and industry-focused — bridging the gap between theory and real client work.
+                    His mission is to make professional graphic design education accessible, practical, and industry-focused — bridging the gap between theory and real client work.
                 </p>
                 <div class="founder-badges">
                     <span>✓ 422K+ Subscribers</span>
@@ -147,6 +172,7 @@
                         <span>Tutorials</span>
                     </div>
                 </div>
+                <a href="index.html#about" class="back-link"><span>←</span> Back to Home</a>
             </div>
         </div>
     </section>
