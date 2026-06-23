@@ -16,7 +16,6 @@
             align-items: start;
         }
 
-        /* ===== CHECKOUT FORM ===== */
         .checkout-form-section h1 {
             font-size: clamp(2rem, 3vw, 2.8rem);
             margin-bottom: 8px;
@@ -188,7 +187,20 @@
             margin-bottom: 8px;
         }
 
-        /* ===== CHECKOUT BUTTON ===== */
+        /* ===== PAYPAL BUTTON CONTAINER ===== */
+        #paypal-button-container {
+            margin-top: 20px;
+            min-height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #paypal-button-container .paypal-loading {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* ===== CHECKOUT BUTTON (Legacy) ===== */
         .checkout-btn {
             width: 100%;
             padding: 18px;
@@ -238,7 +250,7 @@
         .success-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(6, 8, 22, 0.9);
+            background: rgba(6, 8, 22, 0.92);
             backdrop-filter: blur(20px);
             display: none;
             place-items: center;
@@ -290,6 +302,72 @@
             margin: 4px;
         }
 
+        /* ===== PAYMENT STATUS ===== */
+        .payment-status {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: none;
+            font-weight: 500;
+        }
+        .payment-status.show {
+            display: block;
+        }
+        .payment-status.success {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+        .payment-status.error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+        .payment-status.info {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 28px;
+            border-radius: 16px;
+            background: rgba(6, 8, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-weight: 500;
+            z-index: 10001;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast .toast-icon {
+            margin-right: 10px;
+        }
+        .toast.success {
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        .toast.success .toast-icon {
+            color: #4ade80;
+        }
+        .toast.error {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .toast.error .toast-icon {
+            color: #f87171;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .checkout-wrapper {
@@ -316,16 +394,17 @@
             .checkout-form-section h1 {
                 font-size: 1.8rem;
             }
+            .toast {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                max-width: none;
+            }
         }
         @media (max-width: 480px) {
             .payment-methods {
                 grid-template-columns: 1fr;
             }
-        }
-
-        /* ===== TOAST OVERRIDES ===== */
-        .toast {
-            z-index: 10001;
         }
     </style>
 </head>
@@ -411,17 +490,17 @@
                         </div>
                     </div>
 
-                    <!-- Payment Method -->
+                    <!-- Payment Method Selection -->
                     <div class="form-group">
                         <label>Payment Method <span class="required">*</span></label>
                         <div class="payment-methods">
-                            <div class="payment-method active" data-method="card">
-                                <span class="method-icon">💳</span>
-                                Credit Card
-                            </div>
-                            <div class="payment-method" data-method="paypal">
+                            <div class="payment-method active" data-method="paypal">
                                 <span class="method-icon">🟦</span>
                                 PayPal
+                            </div>
+                            <div class="payment-method" data-method="card">
+                                <span class="method-icon">💳</span>
+                                Credit Card
                             </div>
                             <div class="payment-method" data-method="apple">
                                 <span class="method-icon">🍎</span>
@@ -430,20 +509,30 @@
                         </div>
                     </div>
 
-                    <!-- Card Details (shown by default) -->
-                    <div id="cardDetails">
+                    <!-- PayPal Info -->
+                    <div id="paypalInfo" style="background:rgba(255,255,255,0.03);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.06);">
+                        <p style="color:var(--muted);font-size:0.9rem;margin:0;">
+                            🔒 Secure payment via PayPal. You'll be redirected to PayPal to complete your payment.
+                        </p>
+                        <p style="color:var(--muted);font-size:0.85rem;margin:8px 0 0;">
+                            Receiver: <strong style="color:var(--text);">Rawson17@gmail.com</strong>
+                        </p>
+                    </div>
+
+                    <!-- Card Details (hidden by default) -->
+                    <div id="cardDetails" style="display:none;">
                         <div class="form-group">
                             <label>Card Number <span class="required">*</span></label>
-                            <input type="text" id="cardNumber" placeholder="4242 4242 4242 4242" maxlength="19" required>
+                            <input type="text" id="cardNumber" placeholder="4242 4242 4242 4242" maxlength="19">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Expiry Date <span class="required">*</span></label>
-                                <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                                <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
                             </div>
                             <div class="form-group">
                                 <label>CVV <span class="required">*</span></label>
-                                <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                                <input type="text" id="cvv" placeholder="123" maxlength="4">
                             </div>
                         </div>
                     </div>
@@ -457,8 +546,16 @@
                         </label>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button type="submit" class="checkout-btn" id="checkoutBtn">
+                    <!-- Payment Status -->
+                    <div class="payment-status" id="paymentStatus"></div>
+
+                    <!-- PayPal Button Container -->
+                    <div id="paypal-button-container">
+                        <div class="paypal-loading">⏳ Loading PayPal...</div>
+                    </div>
+
+                    <!-- Legacy Checkout Button (hidden when PayPal is active) -->
+                    <button type="submit" class="checkout-btn" id="checkoutBtn" style="display:none;">
                         <span class="btn-text">💰 Complete Payment</span>
                         <span class="btn-loader"></span>
                     </button>
@@ -500,9 +597,19 @@
         <p>© 2026 Creatnprocess. All Rights Reserved.</p>
     </footer>
 
+    <!-- ===== PAYPAL SDK ===== -->
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&intent=capture" data-namespace="paypal_sdk"></script>
+
     <script src="script.js"></script>
     <script>
-        // ===== TOAST SYSTEM =====
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        const PAYPAL_EMAIL = 'Rawson17@gmail.com';
+
+        // ============================================================
+        // TOAST SYSTEM
+        // ============================================================
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const messageEl = toast.querySelector('.toast-message');
@@ -523,7 +630,9 @@
             }, 3500);
         }
 
-        // ===== LOAD CART FROM LOCALSTORAGE =====
+        // ============================================================
+        // LOAD CART FROM LOCALSTORAGE
+        // ============================================================
         function loadCart() {
             try {
                 const saved = JSON.parse(localStorage.getItem('creatnprocess_cart') || '[]');
@@ -533,7 +642,18 @@
             }
         }
 
-        // ===== RENDER ORDER SUMMARY =====
+        // ============================================================
+        // GENERATE ORDER NUMBER
+        // ============================================================
+        function generateOrderNumber() {
+            const year = new Date().getFullYear();
+            const num = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            return `ORD-${year}-${num}`;
+        }
+
+        // ============================================================
+        // RENDER ORDER SUMMARY
+        // ============================================================
         function renderOrderSummary() {
             const cart = loadCart();
             const container = document.getElementById('orderItems');
@@ -546,13 +666,11 @@
                 container.innerHTML = '';
                 emptyCart.style.display = 'block';
                 totals.style.display = 'none';
-                document.getElementById('checkoutBtn').disabled = true;
                 return;
             }
 
             emptyCart.style.display = 'none';
             totals.style.display = 'block';
-            document.getElementById('checkoutBtn').disabled = false;
 
             const courseEmojis = {
                 'Photoshop for Beginners': '🎨',
@@ -571,22 +689,211 @@
                         <span class="item-icon">${courseEmojis[item.title] || '📚'}</span>
                         <span class="item-title">${item.title}</span>
                     </div>
-                    <span class="item-price">$${item.price}</span>
+                    <span class="item-price">$${item.price.toFixed(2)}</span>
                 </div>
             `).join('');
 
             const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-            const total = subtotal; // No tax for now
+            const total = subtotal;
 
             subtotalEl.textContent = '$' + subtotal.toFixed(2);
             grandTotalEl.textContent = '$' + total.toFixed(2);
 
-            // Update button text with total
-            const btn = document.getElementById('checkoutBtn');
-            btn.querySelector('.btn-text').textContent = `💰 Pay $${total.toFixed(2)}`;
+            return { cart, total };
         }
 
-        // ===== PAYMENT METHOD SELECTION =====
+        // ============================================================
+        // COMPLETE ORDER (After Successful Payment)
+        // ============================================================
+        function completeOrder(paymentData) {
+            const cart = loadCart();
+            
+            // Clear cart
+            localStorage.removeItem('creatnprocess_cart');
+            
+            // Add enrolled courses
+            const enrolled = JSON.parse(localStorage.getItem('creatnprocess_enrolled') || '[]');
+            const courseIds = {
+                'Photoshop for Beginners': 1,
+                'Vector Art & Illustration Mastery': 2,
+                'Brand Identity Design Pro': 3,
+                'Photo Manipulation & Retouching': 4,
+                'Graphic Design Fundamentals': 5,
+                'Advanced Logo Design Studio': 6,
+                'UI/UX Design Fundamentals': 7,
+                'Motion Graphics in After Effects': 8
+            };
+            
+            const newEnrolled = [...new Set([
+                ...enrolled,
+                ...cart.map(item => courseIds[item.title]).filter(id => id !== undefined)
+            ])];
+            
+            localStorage.setItem('creatnprocess_enrolled', JSON.stringify(newEnrolled));
+
+            // Show success overlay
+            const orderNumber = generateOrderNumber();
+            document.getElementById('orderNumber').textContent = orderNumber;
+            document.getElementById('successOverlay').classList.add('show');
+
+            // Show toast
+            showToast('🎉 Payment successful! Welcome to the academy!', 'success');
+
+            // Update cart badge on courses page if open
+            if (window.opener) {
+                try {
+                    window.opener.location.reload();
+                } catch (e) {}
+            }
+        }
+
+        // ============================================================
+        // PAYPAL INTEGRATION
+        // ============================================================
+        function initPayPal() {
+            const container = document.getElementById('paypal-button-container');
+            const cart = loadCart();
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="color:var(--muted);text-align:center;padding:20px;">
+                        <p>🛒 Your cart is empty</p>
+                        <p style="font-size:0.85rem;">Add courses to proceed with payment</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            // Check if PayPal SDK loaded
+            if (typeof paypal_sdk === 'undefined') {
+                container.innerHTML = `
+                    <div style="color:#f87171;text-align:center;padding:20px;">
+                        <p>⚠️ PayPal failed to load. Please refresh the page.</p>
+                        <p style="font-size:0.85rem;color:var(--muted);">Alternatively, use the form below.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                paypal_sdk.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color: 'blue',
+                        shape: 'rect',
+                        label: 'paypal',
+                        height: 48
+                    },
+                    
+                    createOrder: function(data, actions) {
+                        // Validate form
+                        const fullName = document.getElementById('fullName').value.trim();
+                        const email = document.getElementById('email').value.trim();
+                        const country = document.getElementById('country').value;
+                        const postalCode = document.getElementById('postalCode').value.trim();
+                        const terms = document.getElementById('terms').checked;
+
+                        if (!fullName || !email || !country || !postalCode || !terms) {
+                            showToast('Please fill in all required fields', 'error');
+                            return actions.reject();
+                        }
+
+                        if (!email.includes('@') || !email.includes('.')) {
+                            showToast('Please enter a valid email address', 'error');
+                            return actions.reject();
+                        }
+
+                        // Create order with PayPal
+                        return actions.order.create({
+                            purchase_units: [{
+                                description: 'Creatnprocess Academy - Course Enrollment',
+                                custom_id: JSON.stringify(cart.map(item => item.title)),
+                                amount: {
+                                    currency_code: 'USD',
+                                    value: total.toFixed(2),
+                                    breakdown: {
+                                        item_total: {
+                                            currency_code: 'USD',
+                                            value: total.toFixed(2)
+                                        }
+                                    }
+                                },
+                                items: cart.map(item => ({
+                                    name: item.title,
+                                    unit_amount: {
+                                        currency_code: 'USD',
+                                        value: item.price.toFixed(2)
+                                    },
+                                    quantity: '1',
+                                    description: 'Graphic Design Course',
+                                    category: 'DIGITAL_GOODS'
+                                }))
+                            }],
+                            application_context: {
+                                shipping_preference: 'NO_SHIPPING',
+                                user_action: 'PAY_NOW'
+                            },
+                            payer: {
+                                email_address: email,
+                                name: {
+                                    given_name: fullName.split(' ')[0] || fullName,
+                                    surname: fullName.split(' ').slice(1).join(' ') || 'User'
+                                }
+                            }
+                        });
+                    },
+
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            // Payment successful
+                            console.log('Payment completed:', details);
+                            console.log('Payer:', details.payer);
+                            console.log('Receiver:', PAYPAL_EMAIL);
+                            
+                            // Complete the order
+                            completeOrder(details);
+                            
+                            // Show success status
+                            const status = document.getElementById('paymentStatus');
+                            status.className = 'payment-status success show';
+                            status.textContent = `✅ Payment successful! Transaction ID: ${details.id}`;
+                        });
+                    },
+
+                    onCancel: function(data) {
+                        showToast('Payment was cancelled. You can try again.', 'error');
+                        const status = document.getElementById('paymentStatus');
+                        status.className = 'payment-status error show';
+                        status.textContent = '❌ Payment cancelled. Please try again.';
+                    },
+
+                    onError: function(err) {
+                        console.error('PayPal Error:', err);
+                        showToast('Payment failed. Please try again or use a different method.', 'error');
+                        const status = document.getElementById('paymentStatus');
+                        status.className = 'payment-status error show';
+                        status.textContent = '❌ Payment failed. Please try again.';
+                    }
+                }).render('#paypal-button-container');
+                
+                container.innerHTML = '';
+                paypal_sdk.Buttons().render('#paypal-button-container');
+                
+            } catch (error) {
+                console.error('PayPal initialization error:', error);
+                container.innerHTML = `
+                    <div style="color:#f87171;text-align:center;padding:20px;">
+                        <p>⚠️ Error loading PayPal. Please refresh the page.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ============================================================
+        // PAYMENT METHOD SELECTION
+        // ============================================================
         document.querySelectorAll('.payment-method').forEach(method => {
             method.addEventListener('click', function() {
                 document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
@@ -594,17 +901,48 @@
                 
                 const methodType = this.dataset.method;
                 const cardDetails = document.getElementById('cardDetails');
+                const paypalContainer = document.getElementById('paypal-button-container');
+                const paypalInfo = document.getElementById('paypalInfo');
+                const checkoutBtn = document.getElementById('checkoutBtn');
+                const paymentStatus = document.getElementById('paymentStatus');
                 
-                if (methodType === 'card') {
-                    cardDetails.style.display = 'block';
-                } else {
+                paymentStatus.className = 'payment-status';
+                paymentStatus.textContent = '';
+                paymentStatus.classList.remove('show');
+                
+                if (methodType === 'paypal') {
                     cardDetails.style.display = 'none';
+                    paypalInfo.style.display = 'block';
+                    paypalContainer.style.display = 'block';
+                    checkoutBtn.style.display = 'none';
+                    
+                    // Re-initialize PayPal if cart has items
+                    const cart = loadCart();
+                    if (cart.length > 0) {
+                        initPayPal();
+                    }
+                } else {
+                    cardDetails.style.display = 'block';
+                    paypalInfo.style.display = 'none';
+                    paypalContainer.style.display = 'none';
+                    checkoutBtn.style.display = 'block';
+                    checkoutBtn.querySelector('.btn-text').textContent = `💰 Pay $${calculateTotal()}`;
                 }
             });
         });
 
-        // ===== CARD INPUT FORMATTING =====
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
+        // ============================================================
+        // CALCULATE TOTAL
+        // ============================================================
+        function calculateTotal() {
+            const cart = loadCart();
+            return cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+        }
+
+        // ============================================================
+        // CARD INPUT FORMATTING
+        // ============================================================
+        document.getElementById('cardNumber')?.addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, '');
             if (value.length > 16) value = value.slice(0, 16);
             let formatted = '';
@@ -615,7 +953,7 @@
             this.value = formatted;
         });
 
-        document.getElementById('expiryDate').addEventListener('input', function(e) {
+        document.getElementById('expiryDate')?.addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, '');
             if (value.length > 4) value = value.slice(0, 4);
             if (value.length >= 2) {
@@ -625,50 +963,32 @@
             }
         });
 
-        document.getElementById('cvv').addEventListener('input', function(e) {
+        document.getElementById('cvv')?.addEventListener('input', function(e) {
             this.value = this.value.replace(/\D/g, '').slice(0, 4);
         });
 
-        // ===== GENERATE ORDER NUMBER =====
-        function generateOrderNumber() {
-            const year = new Date().getFullYear();
-            const num = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-            return `ORD-${year}-${num}`;
-        }
-
-        // ===== PROCESS PAYMENT =====
-        function processPayment(formData) {
-            return new Promise((resolve, reject) => {
-                // Simulate payment processing
-                setTimeout(() => {
-                    // Random success/failure (90% success rate for demo)
-                    if (Math.random() < 0.9) {
-                        resolve({ success: true, orderNumber: generateOrderNumber() });
-                    } else {
-                        reject({ success: false, message: 'Payment declined. Please try again.' });
-                    }
-                }, 2000);
-            });
-        }
-
-        // ===== HANDLE FORM SUBMISSION =====
-        document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+        // ============================================================
+        // LEGACY FORM SUBMISSION (Credit Card fallback)
+        // ============================================================
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const btn = document.getElementById('checkoutBtn');
-            const cart = loadCart();
-
-            if (cart.length === 0) {
-                showToast('Your cart is empty. Add some courses first!', 'error');
+            
+            // Check if PayPal is selected (should be hidden)
+            const activeMethod = document.querySelector('.payment-method.active');
+            if (activeMethod && activeMethod.dataset.method === 'paypal') {
+                showToast('Please use the PayPal button above to complete payment.', 'info');
                 return;
             }
 
-            // Basic validation
+            // Validate form
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
             const country = document.getElementById('country').value;
             const postalCode = document.getElementById('postalCode').value.trim();
             const terms = document.getElementById('terms').checked;
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const expiry = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
 
             if (!fullName || !email || !country || !postalCode || !terms) {
                 showToast('Please fill in all required fields', 'error');
@@ -680,123 +1000,115 @@
                 return;
             }
 
-            // Check if card details are needed
-            const activeMethod = document.querySelector('.payment-method.active');
-            const methodType = activeMethod ? activeMethod.dataset.method : 'card';
-
-            if (methodType === 'card') {
-                const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
-                const expiry = document.getElementById('expiryDate').value;
-                const cvv = document.getElementById('cvv').value;
-
-                if (cardNumber.length < 16 || expiry.length < 5 || cvv.length < 3) {
-                    showToast('Please enter valid card details', 'error');
-                    return;
-                }
+            if (cardNumber.length < 16 || expiry.length < 5 || cvv.length < 3) {
+                showToast('Please enter valid card details', 'error');
+                return;
             }
 
-            // Show loading state
+            // Show loading
+            const btn = document.getElementById('checkoutBtn');
             btn.classList.add('loading');
             btn.disabled = true;
 
-            try {
-                // Collect form data
-                const formData = {
-                    fullName,
-                    email,
-                    country,
-                    postalCode,
-                    paymentMethod: methodType,
-                    items: cart,
-                    total: cart.reduce((sum, item) => sum + item.price, 0)
-                };
-
-                // Process payment
-                const result = await processPayment(formData);
-
-                // Success!
-                if (result.success) {
+            // Simulate payment processing
+            setTimeout(() => {
+                // Random success/failure (90% success rate)
+                if (Math.random() < 0.9) {
+                    const orderNumber = generateOrderNumber();
+                    document.getElementById('orderNumber').textContent = orderNumber;
+                    document.getElementById('successOverlay').classList.add('show');
+                    
                     // Clear cart
                     localStorage.removeItem('creatnprocess_cart');
                     
                     // Add enrolled courses
+                    const cart = loadCart();
                     const enrolled = JSON.parse(localStorage.getItem('creatnprocess_enrolled') || '[]');
-                    const newEnrolled = [...new Set([...enrolled, ...cart.map(item => {
-                        // Find course ID by title (simplified)
-                        const courses = [
-                            { id: 1, title: 'Photoshop for Beginners' },
-                            { id: 2, title: 'Vector Art & Illustration Mastery' },
-                            { id: 3, title: 'Brand Identity Design Pro' },
-                            { id: 4, title: 'Photo Manipulation & Retouching' },
-                            { id: 5, title: 'Graphic Design Fundamentals' },
-                            { id: 6, title: 'Advanced Logo Design Studio' },
-                            { id: 7, title: 'UI/UX Design Fundamentals' },
-                            { id: 8, title: 'Motion Graphics in After Effects' }
-                        ];
-                        const found = courses.find(c => c.title === item.title);
-                        return found ? found.id : null;
-                    }).filter(id => id !== null)])];
-                    
+                    const courseIds = {
+                        'Photoshop for Beginners': 1,
+                        'Vector Art & Illustration Mastery': 2,
+                        'Brand Identity Design Pro': 3,
+                        'Photo Manipulation & Retouching': 4,
+                        'Graphic Design Fundamentals': 5,
+                        'Advanced Logo Design Studio': 6,
+                        'UI/UX Design Fundamentals': 7,
+                        'Motion Graphics in After Effects': 8
+                    };
+                    const newEnrolled = [...new Set([
+                        ...enrolled,
+                        ...cart.map(item => courseIds[item.title]).filter(id => id !== undefined)
+                    ])];
                     localStorage.setItem('creatnprocess_enrolled', JSON.stringify(newEnrolled));
-
-                    // Show success overlay
-                    document.getElementById('orderNumber').textContent = result.orderNumber;
-                    document.getElementById('successOverlay').classList.add('show');
-
-                    // Update cart badge on other pages
-                    if (window.opener) {
-                        try {
-                            window.opener.location.reload();
-                        } catch (e) {}
-                    }
-
+                    
                     showToast('🎉 Payment successful! Welcome to the academy!', 'success');
+                    
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                } else {
+                    showToast('Payment declined. Please try again.', 'error');
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
                 }
-            } catch (error) {
-                // Error handling
-                showToast(error.message || 'Payment failed. Please try again.', 'error');
-                btn.classList.remove('loading');
-                btn.disabled = false;
-            } finally {
-                btn.classList.remove('loading');
-                btn.disabled = false;
-            }
+            }, 2000);
         });
 
-        // ===== CLOSE SUCCESS OVERLAY =====
+        // ============================================================
+        // CLOSE SUCCESS OVERLAY
+        // ============================================================
         document.getElementById('successOverlay').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.remove('show');
             }
         });
 
-        // ===== INITIALIZE =====
-        document.addEventListener('DOMContentLoaded', function() {
-            renderOrderSummary();
-
-            // Listen for cart updates from other tabs/windows
-            window.addEventListener('storage', function(e) {
-                if (e.key === 'creatnprocess_cart') {
-                    renderOrderSummary();
-                }
-            });
-
-            // If cart is empty on load, show message
-            const cart = loadCart();
-            if (cart.length === 0) {
-                document.getElementById('checkoutBtn').disabled = true;
-            }
-        });
-
-        // ===== KEYBOARD SHORTCUT =====
+        // ============================================================
+        // KEYBOARD SHORTCUTS
+        // ============================================================
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 document.getElementById('successOverlay').classList.remove('show');
             }
         });
 
+        // ============================================================
+        // INITIALIZE
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            renderOrderSummary();
+            
+            // Initialize PayPal if cart has items
+            const cart = loadCart();
+            if (cart.length > 0) {
+                // Check if PayPal is the active method
+                const activeMethod = document.querySelector('.payment-method.active');
+                if (activeMethod && activeMethod.dataset.method === 'paypal') {
+                    setTimeout(initPayPal, 500);
+                }
+            }
+
+            // Listen for cart updates
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'creatnprocess_cart') {
+                    renderOrderSummary();
+                    const cart = loadCart();
+                    if (cart.length > 0) {
+                        const activeMethod = document.querySelector('.payment-method.active');
+                        if (activeMethod && activeMethod.dataset.method === 'paypal') {
+                            initPayPal();
+                        }
+                    }
+                }
+            });
+
+            // Update button text with total
+            const total = calculateTotal();
+            document.querySelector('#checkoutBtn .btn-text').textContent = `💰 Pay $${total}`;
+        });
+
         console.log('💳 Checkout page loaded successfully!');
+        console.log('📧 PayPal receiver:', PAYPAL_EMAIL);
         console.log('📦 Items in cart:', loadCart().length);
+        console.log('💡 PayPal Sandbox mode active - use test accounts for payments');
     </script>
 </body>
 </html>
