@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* ===== COURSES PAGE STYLES ===== */
         .courses-header {
             text-align: center;
             padding: 60px 0 20px;
@@ -64,11 +65,15 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            cursor: default;
         }
         .course-card:hover {
             transform: translateY(-8px);
             border-color: rgba(139, 92, 246, 0.4);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        .course-card.hidden {
+            display: none;
         }
 
         .course-card .course-badge {
@@ -105,12 +110,17 @@
             margin-bottom: 18px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         .course-card .course-thumb::after {
             content: "";
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+            transition: background 0.3s;
+        }
+        .course-card .course-thumb:hover::after {
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
         }
         .course-card .course-thumb .play-icon {
             position: relative;
@@ -124,6 +134,11 @@
             place-items: center;
             font-size: 1.8rem;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s, background 0.3s;
+        }
+        .course-card .course-thumb:hover .play-icon {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .course-card h3 {
@@ -137,6 +152,7 @@
             color: var(--muted);
             font-size: 0.85rem;
             margin: 10px 0 14px;
+            flex-wrap: wrap;
         }
         .course-card .course-meta span {
             display: flex;
@@ -155,6 +171,8 @@
             align-items: center;
             padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
+            flex-wrap: wrap;
+            gap: 12px;
         }
         .course-card .course-price {
             font-size: 1.5rem;
@@ -183,10 +201,25 @@
             transition: transform 0.2s, box-shadow 0.2s;
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         .course-card .btn-small:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+        .course-card .btn-small:active {
+            transform: scale(0.95);
+        }
+        .course-card .btn-small.enrolled {
+            background: rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            cursor: default;
+        }
+        .course-card .btn-small.enrolled:hover {
+            transform: none;
+            box-shadow: none;
         }
 
         .course-card .featured-tag {
@@ -201,6 +234,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            z-index: 2;
         }
 
         .course-card .progress-bar {
@@ -215,7 +249,8 @@
             height: 100%;
             border-radius: 4px;
             background: linear-gradient(90deg, var(--a), var(--b));
-            transition: width 0.6s ease;
+            transition: width 1s ease;
+            width: 0%;
         }
 
         .course-card .students-enrolled {
@@ -226,7 +261,7 @@
             gap: 6px;
         }
 
-        /* Featured Course Section */
+        /* Featured Course */
         .featured-course {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -262,12 +297,17 @@
             font-size: 1.5rem;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         .featured-course .featured-thumb::after {
             content: "";
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+            transition: background 0.3s;
+        }
+        .featured-course .featured-thumb:hover::after {
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
         }
         .featured-course .featured-thumb .play-icon {
             position: relative;
@@ -281,6 +321,11 @@
             place-items: center;
             font-size: 2.4rem;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s, background 0.3s;
+        }
+        .featured-course .featured-thumb:hover .play-icon {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
         }
         .featured-course .featured-info .badge {
             display: inline-block;
@@ -318,6 +363,83 @@
             gap: 6px;
         }
 
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 16px 28px;
+            border-radius: 16px;
+            background: rgba(6, 8, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast .toast-icon {
+            margin-right: 10px;
+        }
+        .toast.success {
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        .toast.success .toast-icon {
+            color: #4ade80;
+        }
+        .toast.error {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .toast.error .toast-icon {
+            color: #f87171;
+        }
+
+        /* Cart Counter */
+        .cart-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 14px 24px;
+            border-radius: 16px;
+            background: rgba(6, 8, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-weight: 500;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .cart-counter:hover {
+            transform: scale(1.05);
+        }
+        .cart-counter .cart-badge {
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            border-radius: 999px;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            min-width: 24px;
+            text-align: center;
+        }
+        .cart-counter .cart-total {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 900px) {
             .featured-course {
                 grid-template-columns: 1fr;
@@ -329,6 +451,19 @@
             .courses-grid {
                 grid-template-columns: 1fr;
             }
+            .cart-counter {
+                bottom: 20px;
+                left: 20px;
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+            .toast {
+                bottom: 80px;
+                right: 20px;
+                left: 20px;
+                max-width: none;
+                font-size: 0.9rem;
+            }
         }
         @media (max-width: 768px) {
             .course-filters button {
@@ -337,12 +472,27 @@
             }
             .course-card .course-footer {
                 flex-direction: column;
-                gap: 12px;
                 align-items: stretch;
             }
             .course-card .btn-small {
                 text-align: center;
             }
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+            display: none;
+        }
+        .no-results.show {
+            display: block;
+        }
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
         }
     </style>
 </head>
@@ -350,18 +500,32 @@
 
     <div class="cursor-glow"></div>
 
-    <nav id="nav">
-    <div class="brand">Creatnprocess</div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="blog.html">Blog</a>
-        <a href="index.html#showcase">Portfolio</a>
-        <a href="index.html#academy">Academy</a>
-        <a href="founder.html">About</a>
-        <a href="index.html#contact">Contact</a>
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-message">Course enrolled successfully!</span>
     </div>
-</nav>
+
+    <!-- ===== CART COUNTER ===== -->
+    <div class="cart-counter" id="cartCounter" onclick="toggleCart()">
+        <span>🛒</span>
+        <span>Cart</span>
+        <span class="cart-badge" id="cartBadge">0</span>
+        <span class="cart-total" id="cartTotal">$0</span>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav id="nav">
+        <div class="brand">Creatnprocess</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#showcase">Portfolio</a>
+            <a href="founder.html">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
 
     <section class="section">
         <div class="courses-header reveal">
@@ -370,7 +534,7 @@
         </div>
 
         <!-- Course Filters -->
-        <div class="course-filters reveal">
+        <div class="course-filters reveal" id="filterContainer">
             <button class="active" data-filter="all">All Courses</button>
             <button data-filter="beginner">Beginner</button>
             <button data-filter="intermediate">Intermediate</button>
@@ -381,8 +545,8 @@
         </div>
 
         <!-- Featured Course -->
-        <div class="featured-course reveal">
-            <div class="featured-thumb">
+        <div class="featured-course reveal" id="featuredCourse">
+            <div class="featured-thumb" onclick="enrollFeatured()">
                 <div class="play-icon">▶</div>
             </div>
             <div class="featured-info">
@@ -395,142 +559,26 @@
                     <span>👥 4,200+ students</span>
                     <span>🏷️ All Levels</span>
                 </div>
-                <a href="#" class="btn primary" style="display:inline-block;">Enroll Now →</a>
+                <button class="btn primary" onclick="enrollFeatured()" style="border:none;cursor:pointer;font-size:1rem;">
+                    Enroll Now →
+                </button>
             </div>
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <h3>🔍 No courses found</h3>
+            <p>Try adjusting your filters to find what you're looking for.</p>
         </div>
 
         <!-- Courses Grid -->
-        <div class="courses-grid reveal" id="coursesGrid">
-
-            <!-- Course 1 -->
-            <div class="course-card" data-level="beginner" data-category="photoshop">
-                <span class="course-badge beginner">Beginner</span>
-                <div class="course-thumb">
-                    <div class="play-icon">▶</div>
-                </div>
-                <h3>Photoshop for Beginners</h3>
-                <div class="course-meta">
-                    <span>📚 18 Lessons</span>
-                    <span>⏱️ 8 hours</span>
-                </div>
-                <p>Start your Photoshop journey from scratch. Learn the essential tools, techniques, and workflows used by professionals.</p>
-                <div class="students-enrolled">👥 2,800+ students enrolled</div>
-                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-                <div class="course-footer">
-                    <div class="course-price">$49 <span class="old">$79</span></div>
-                    <a href="#" class="btn-small">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Course 2 -->
-            <div class="course-card" data-level="intermediate" data-category="illustrator">
-                <span class="course-badge intermediate">Intermediate</span>
-                <div class="course-thumb">
-                    <div class="play-icon">▶</div>
-                </div>
-                <h3>Vector Art & Illustration Mastery</h3>
-                <div class="course-meta">
-                    <span>📚 24 Lessons</span>
-                    <span>⏱️ 12 hours</span>
-                </div>
-                <p>Master Adobe Illustrator and create professional vector art, logos, and illustrations with advanced techniques.</p>
-                <div class="students-enrolled">👥 1,900+ students enrolled</div>
-                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-                <div class="course-footer">
-                    <div class="course-price">$79 <span class="old">$99</span></div>
-                    <a href="#" class="btn-small">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Course 3 -->
-            <div class="course-card" data-level="advanced" data-category="branding">
-                <span class="featured-tag">Best Seller</span>
-                <span class="course-badge advanced">Advanced</span>
-                <div class="course-thumb">
-                    <div class="play-icon">▶</div>
-                </div>
-                <h3>Brand Identity Design Pro</h3>
-                <div class="course-meta">
-                    <span>📚 32 Lessons</span>
-                    <span>⏱️ 16 hours</span>
-                </div>
-                <p>Learn to create complete brand identities from research to final presentation. Build professional client-ready branding packages.</p>
-                <div class="students-enrolled">👥 1,500+ students enrolled</div>
-                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-                <div class="course-footer">
-                    <div class="course-price">$99</div>
-                    <a href="#" class="btn-small">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Course 4 -->
-            <div class="course-card" data-level="intermediate" data-category="photoshop">
-                <span class="course-badge intermediate">Intermediate</span>
-                <div class="course-thumb">
-                    <div class="play-icon">▶</div>
-                </div>
-                <h3>Photo Manipulation & Retouching</h3>
-                <div class="course-meta">
-                    <span>📚 20 Lessons</span>
-                    <span>⏱️ 10 hours</span>
-                </div>
-                <p>Take your Photoshop skills to the next level with advanced photo manipulation, retouching, and compositing techniques.</p>
-                <div class="students-enrolled">👥 1,200+ students enrolled</div>
-                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-                <div class="course-footer">
-                    <div class="course-price">$69 <span class="old">$89</span></div>
-                    <a href="#" class="btn-small">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Course 5 -->
-            <div class="course-card" data-level="beginner" data-category="branding">
-                <span class="course-badge beginner">Beginner</span>
-                <div class="course-thumb">
-                    <div class="play-icon">▶</div>
-                </div>
-                <h3>Graphic Design Fundamentals</h3>
-                <div class="course-meta">
-                    <span>📚 14 Lessons</span>
-                    <span>⏱️ 6 hours</span>
-                </div>
-                <p>Learn the core principles of graphic design: color theory, typography, layout, and composition. Perfect for beginners.</p>
-                <div class="students-enrolled">👥 3,400+ students enrolled</div>
-                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-                <div class="course-footer">
-                    <div class="course-price">$39 <span class="old">$59</span></div>
-                    <a href="#" class="btn-small">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Course 6 -->
-            <div class="course-card" data-level="advanced" data-category="illustrator">
-                <span class="featured-tag">New</span>
-                <span class="course-badge advanced">Advanced</span>
-                <div class="course-thumb">
-                    <div class="play-icon">▶</div>
-                </div>
-                <h3>Advanced Logo Design Studio</h3>
-                <div class="course-meta">
-                    <span>📚 28 Lessons</span>
-                    <span>⏱️ 14 hours</span>
-                </div>
-                <p>Master the art of logo design from concept to final delivery. Learn professional workflows and client presentation techniques.</p>
-                <div class="students-enrolled">👥 980+ students enrolled</div>
-                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
-                <div class="course-footer">
-                    <div class="course-price">$89</div>
-                    <a href="#" class="btn-small">Enroll Now</a>
-                </div>
-            </div>
-
-        </div>
+        <div class="courses-grid reveal" id="coursesGrid"></div>
 
         <!-- Call to Action -->
         <div style="text-align:center;margin-top:60px;padding:50px;background:rgba(255,255,255,0.02);border-radius:24px;border:1px solid rgba(255,255,255,0.06);">
             <h2 style="margin-bottom:12px;">Ready to Level Up Your Design Skills?</h2>
             <p style="color:var(--muted);max-width:600px;margin:0 auto 24px;">Join thousands of students who have transformed their creative careers through our practical, project-based courses.</p>
-            <a href="#" class="btn primary">Browse All Courses</a>
+            <button class="btn primary" onclick="document.querySelector('.course-filters button[data-filter=\'all\']').click();" style="border:none;cursor:pointer;">Browse All Courses</button>
         </div>
 
     </section>
@@ -541,46 +589,350 @@
 
     <script src="script.js"></script>
     <script>
-        // Course Filtering
+        // ===== COURSE DATA =====
+        const courses = [{
+            id: 1,
+            title: "Photoshop for Beginners",
+            level: "beginner",
+            category: "photoshop",
+            lessons: 18,
+            duration: "8 hours",
+            students: 2800,
+            price: 49,
+            oldPrice: 79,
+            description: "Start your Photoshop journey from scratch. Learn the essential tools, techniques, and workflows used by professionals.",
+            thumbnail: "🎨",
+            badge: "beginner",
+            featured: false,
+            bestSeller: false,
+            new: false
+        }, {
+            id: 2,
+            title: "Vector Art & Illustration Mastery",
+            level: "intermediate",
+            category: "illustrator",
+            lessons: 24,
+            duration: "12 hours",
+            students: 1900,
+            price: 79,
+            oldPrice: 99,
+            description: "Master Adobe Illustrator and create professional vector art, logos, and illustrations with advanced techniques.",
+            thumbnail: "✏️",
+            badge: "intermediate",
+            featured: false,
+            bestSeller: false,
+            new: false
+        }, {
+            id: 3,
+            title: "Brand Identity Design Pro",
+            level: "advanced",
+            category: "branding",
+            lessons: 32,
+            duration: "16 hours",
+            students: 1500,
+            price: 99,
+            oldPrice: null,
+            description: "Learn to create complete brand identities from research to final presentation. Build professional client-ready branding packages.",
+            thumbnail: "🏷️",
+            badge: "advanced",
+            featured: false,
+            bestSeller: true,
+            new: false
+        }, {
+            id: 4,
+            title: "Photo Manipulation & Retouching",
+            level: "intermediate",
+            category: "photoshop",
+            lessons: 20,
+            duration: "10 hours",
+            students: 1200,
+            price: 69,
+            oldPrice: 89,
+            description: "Take your Photoshop skills to the next level with advanced photo manipulation, retouching, and compositing techniques.",
+            thumbnail: "📸",
+            badge: "intermediate",
+            featured: false,
+            bestSeller: false,
+            new: false
+        }, {
+            id: 5,
+            title: "Graphic Design Fundamentals",
+            level: "beginner",
+            category: "branding",
+            lessons: 14,
+            duration: "6 hours",
+            students: 3400,
+            price: 39,
+            oldPrice: 59,
+            description: "Learn the core principles of graphic design: color theory, typography, layout, and composition. Perfect for beginners.",
+            thumbnail: "📐",
+            badge: "beginner",
+            featured: false,
+            bestSeller: false,
+            new: false
+        }, {
+            id: 6,
+            title: "Advanced Logo Design Studio",
+            level: "advanced",
+            category: "illustrator",
+            lessons: 28,
+            duration: "14 hours",
+            students: 980,
+            price: 89,
+            oldPrice: null,
+            description: "Master the art of logo design from concept to final delivery. Learn professional workflows and client presentation techniques.",
+            thumbnail: "🖌️",
+            badge: "advanced",
+            featured: false,
+            bestSeller: false,
+            new: true
+        }, {
+            id: 7,
+            title: "UI/UX Design Fundamentals",
+            level: "intermediate",
+            category: "photoshop",
+            lessons: 22,
+            duration: "11 hours",
+            students: 850,
+            price: 74,
+            oldPrice: 94,
+            description: "Learn the principles of user interface and user experience design. Create stunning, user-friendly digital experiences.",
+            thumbnail: "💻",
+            badge: "intermediate",
+            featured: false,
+            bestSeller: false,
+            new: true
+        }, {
+            id: 8,
+            title: "Motion Graphics in After Effects",
+            level: "advanced",
+            category: "branding",
+            lessons: 30,
+            duration: "15 hours",
+            students: 720,
+            price: 109,
+            oldPrice: null,
+            description: "Bring your designs to life with professional motion graphics. Master After Effects and create stunning animations.",
+            thumbnail: "🎬",
+            badge: "advanced",
+            featured: false,
+            bestSeller: false,
+            new: false
+        }];
+
+        // ===== SHOPPING CART =====
+        let cart = [];
+        let enrolledCourses = new Set();
+
+        // ===== TOAST SYSTEM =====
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const messageEl = toast.querySelector('.toast-message');
+            const iconEl = toast.querySelector('.toast-icon');
+            
+            toast.className = 'toast ' + type;
+            iconEl.textContent = type === 'success' ? '✅' : '❌';
+            messageEl.textContent = message;
+            
+            // Reset animation
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===== CART FUNCTIONS =====
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const totalEl = document.getElementById('cartTotal');
+            
+            badge.textContent = cart.length;
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            totalEl.textContent = '$' + total;
+            
+            // Animate badge
+            badge.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                badge.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function toggleCart() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty. Start exploring courses!', 'error');
+                return;
+            }
+            
+            const courseNames = cart.map(c => c.title).join('\n• ');
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const message = `🛒 Your Cart:\n• ${courseNames}\n\nTotal: $${total}\n\nClick OK to checkout (demo)`;
+            
+            if (confirm(message)) {
+                // Checkout simulation
+                enrolledCourses = new Set([...enrolledCourses, ...cart.map(c => c.id)]);
+                showToast(`🎉 Successfully enrolled in ${cart.length} course(s)!`, 'success');
+                cart = [];
+                updateCartUI();
+                renderCourses();
+            }
+        }
+
+        function enrollCourse(courseId) {
+            const course = courses.find(c => c.id === courseId);
+            if (!course) return;
+            
+            if (enrolledCourses.has(courseId)) {
+                showToast(`You're already enrolled in "${course.title}"`, 'error');
+                return;
+            }
+            
+            if (cart.some(c => c.id === courseId)) {
+                showToast(`"${course.title}" is already in your cart`, 'error');
+                return;
+            }
+            
+            cart.push({
+                id: course.id,
+                title: course.title,
+                price: course.price
+            });
+            
+            updateCartUI();
+            showToast(`📚 "${course.title}" added to cart!`, 'success');
+            renderCourses();
+        }
+
+        function enrollFeatured() {
+            const featuredCourse = courses[0]; // Use first course as featured
+            enrollCourse(featuredCourse.id);
+        }
+
+        // ===== RENDER COURSES =====
+        function renderCourses(filter = 'all') {
+            const grid = document.getElementById('coursesGrid');
+            const noResults = document.getElementById('noResults');
+            
+            let filteredCourses = courses;
+            
+            if (filter !== 'all') {
+                filteredCourses = courses.filter(c => 
+                    c.level === filter || 
+                    c.category === filter
+                );
+            }
+            
+            if (filteredCourses.length === 0) {
+                noResults.classList.add('show');
+                grid.innerHTML = '';
+                return;
+            }
+            
+            noResults.classList.remove('show');
+            
+            grid.innerHTML = filteredCourses.map(course => {
+                const isEnrolled = enrolledCourses.has(course.id);
+                const inCart = cart.some(c => c.id === course.id);
+                
+                let buttonHTML;
+                if (isEnrolled) {
+                    buttonHTML = `<button class="btn-small enrolled" disabled>✅ Enrolled</button>`;
+                } else if (inCart) {
+                    buttonHTML = `<button class="btn-small" style="background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.2);" onclick="enrollCourse(${course.id})">📦 In Cart</button>`;
+                } else {
+                    buttonHTML = `<button class="btn-small" onclick="enrollCourse(${course.id})">Enroll Now</button>`;
+                }
+                
+                const tags = [];
+                if (course.bestSeller) tags.push(`<span class="featured-tag">⭐ Best Seller</span>`);
+                if (course.new) tags.push(`<span class="featured-tag" style="background:linear-gradient(90deg, #3b82f6, #8b5cf6);">🆕 New</span>`);
+                
+                return `
+                    <div class="course-card" data-level="${course.level}" data-category="${course.category}">
+                        ${tags.join('')}
+                        <span class="course-badge ${course.badge}">${course.level}</span>
+                        <div class="course-thumb" onclick="enrollCourse(${course.id})">
+                            <span style="font-size:3rem;position:relative;z-index:1;">${course.thumbnail}</span>
+                            <div class="play-icon">▶</div>
+                        </div>
+                        <h3>${course.title}</h3>
+                        <div class="course-meta">
+                            <span>📚 ${course.lessons} Lessons</span>
+                            <span>⏱️ ${course.duration}</span>
+                        </div>
+                        <p>${course.description}</p>
+                        <div class="students-enrolled">👥 ${course.students.toLocaleString()}+ students enrolled</div>
+                        <div class="progress-bar"><div class="fill" data-progress="${Math.floor(Math.random() * 60) + 20}"></div></div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                $${course.price}
+                                ${course.oldPrice ? `<span class="old">$${course.oldPrice}</span>` : ''}
+                            </div>
+                            ${buttonHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Animate progress bars
+            document.querySelectorAll('.course-card .progress-bar .fill').forEach(el => {
+                const progress = parseInt(el.dataset.progress);
+                setTimeout(() => {
+                    el.style.width = progress + '%';
+                }, 300);
+            });
+        }
+
+        // ===== FILTER SYSTEM =====
         document.addEventListener('DOMContentLoaded', function() {
             const filterButtons = document.querySelectorAll('.course-filters button');
-            const courseCards = document.querySelectorAll('.course-card');
-
+            
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Update active button
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
-
+                    
                     const filter = this.dataset.filter;
-
-                    courseCards.forEach(card => {
-                        const level = card.dataset.level || '';
-                        const category = card.dataset.category || '';
-
-                        if (filter === 'all') {
-                            card.style.display = 'block';
-                        } else if (level === filter || category === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+                    renderCourses(filter);
                 });
             });
-
-            // Animate progress bars
-            courseCards.forEach(card => {
-                const fill = card.querySelector('.progress-bar .fill');
-                if (fill) {
-                    setTimeout(() => {
-                        // Random progress for demo
-                        const progress = Math.floor(Math.random() * 60) + 20;
-                        fill.style.width = progress + '%';
-                    }, 500);
-                }
-            });
+            
+            // Initial render
+            renderCourses('all');
+            updateCartUI();
+            
+            // Load saved cart from localStorage
+            try {
+                const savedCart = JSON.parse(localStorage.getItem('creatnprocess_cart') || '[]');
+                const savedEnrolled = JSON.parse(localStorage.getItem('creatnprocess_enrolled') || '[]');
+                if (Array.isArray(savedCart)) cart = savedCart;
+                if (Array.isArray(savedEnrolled)) enrolledCourses = new Set(savedEnrolled);
+                updateCartUI();
+                renderCourses();
+            } catch (e) {}
+            
+            // Save cart to localStorage on changes
+            setInterval(() => {
+                localStorage.setItem('creatnprocess_cart', JSON.stringify(cart));
+                localStorage.setItem('creatnprocess_enrolled', JSON.stringify([...enrolledCourses]));
+            }, 1000);
         });
+
+        // ===== KEYBOARD SHORTCUTS =====
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'c' || e.key === 'C') {
+                toggleCart();
+            }
+        });
+
+        console.log('🎓 Creatnprocess Academy - Courses Loaded!');
+        console.log(`📚 ${courses.length} courses available`);
+        console.log('💡 Press "C" to toggle cart');
     </script>
 </body>
 </html>
