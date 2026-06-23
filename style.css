@@ -172,6 +172,19 @@ h1 {
   opacity: 0.9;
 }
 
+/* ===== VIEW MORE BUTTON ===== */
+.heading-row + .portfolio + div a:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(139, 92, 246, 0.3) !important;
+  color: var(--text) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.heading-row + .portfolio + div a:hover span {
+  transform: translateX(4px);
+}
+
 /* ===== SECTIONS ===== */
 .section {
   width: min(1240px, 92%);
