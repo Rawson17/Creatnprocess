@@ -1,52 +1,239 @@
-/* ===== ABOUT ===== */
-.about {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 50px;
-  align-items: center;
-}
-.avatar {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid rgba(139, 92, 246, 0.3);
-  box-shadow: 0 0 60px rgba(139, 92, 246, 0.15);
-  transition: all 0.4s ease;
-  flex-shrink: 0;
-}
-.avatar:hover {
-  transform: scale(1.03);
-  border-color: var(--a);
-  box-shadow: 0 0 80px rgba(139, 92, 246, 0.25);
-}
-.avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-}
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
-}
-.badges span {
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.85rem;
-  font-weight: 500;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creatnprocess | Creative Studio & Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-/* ===== ABOUT SECTION LINK ===== */
-.about a[href="founder.html"]:hover {
-  background: linear-gradient(90deg, var(--a), var(--b));
-  color: white !important;
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-}
+  <!-- ===== CURSOR GLOW ===== -->
+  <div class="cursor-glow"></div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="nav">
+    <div class="brand">Creatnprocess</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#showcase">Portfolio</a>
+      <a href="#academy">Academy</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header id="home" class="hero">
+    <div class="hero-content reveal">
+      <span class="pill">422K+ YouTube Subscribers</span>
+      <h1>Graphic Design Education &amp; Creative Resources</h1>
+      <p>Graphic Designer • Educator • Content Creator helping designers master Photoshop, Illustrator and professional creative workflows.</p>
+      <div class="hero-buttons">
+        <a href="https://youtube.com/@creatnprocess" target="_blank" class="btn primary">Watch YouTube Channel</a>
+        <a href="#" class="btn secondary">Download Media Kit</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats reveal">
+    <div class="stat"><h3>422K+</h3><span>Subscribers</span></div>
+    <div class="stat"><h3>23.8M+</h3><span>Views</span></div>
+    <div class="stat"><h3>386+</h3><span>Tutorials</span></div>
+    <div class="stat"><h3>10,000+</h3><span>Students Helped</span></div>
+    <div class="stat"><h3>10+</h3><span>Years of Expertise</span></div>
+  </section>
+
+  <!-- ===== TUTORIALS ===== -->
+  <section id="tutorials" class="section reveal">
+    <h2>Featured Tutorials</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="thumb">Poster Design</div>
+        <h3>Professional Poster Design in Photoshop</h3>
+        <p>Create cinematic and commercial posters.</p>
+      </div>
+      <div class="card">
+        <div class="thumb">Logo Design</div>
+        <h3>Modern Logo Design in Illustrator</h3>
+        <p>From sketch to final presentation.</p>
+      </div>
+      <div class="card">
+        <div class="thumb">Social Media</div>
+        <h3>Social Media Design Masterclass</h3>
+        <p>Create engaging content designs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SHOWCASE ===== -->
+  <section id="showcase" class="section reveal">
+    <div class="heading-row">
+      <h2>Design Showcase</h2>
+      <div class="filters">
+        <button class="active">All</button>
+        <button>Posters</button>
+        <button>Branding</button>
+        <button>Thumbnails</button>
+      </div>
+    </div>
+    <div class="portfolio">
+      <div class="project large"><div class="image">Brand Identity Project</div></div>
+      <div class="project"><div class="image">Poster Project</div></div>
+      <div class="project"><div class="image">Thumbnail Collection</div></div>
+      <div class="project"><div class="image">Photo Manipulation</div></div>
+    </div>
+  </section>
+
+  <!-- ===== ACADEMY & RESOURCES (ICON-FREE MINIMALIST) ===== -->
+  <section id="academy" class="section reveal" style="position:relative; overflow:hidden;">
+    
+    <!-- Subtle background glow for this section only -->
+    <div style="position:absolute; top:-150px; right:-150px; width:600px; height:600px; background:radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%); border-radius:50%; pointer-events:none; z-index:0;"></div>
+
+    <div style="position:relative; z-index:1;">
+      <h2 style="text-align:center; font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 10px;">Academy & Resources</h2>
+      <p style="text-align:center; color: var(--muted); font-size: 1.1rem; margin-bottom: 40px;">Everything you need to master professional graphic design.</p>
+      
+      <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
+        
+        <!-- Card 1 -->
+        <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative;">
+          <!-- Decorative glowing left line -->
+          <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
+          
+          <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">Design Courses</h3>
+          <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Premium step-by-step courses covering Photoshop, Illustrator, and professional design workflows.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative;">
+          <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
+          
+          <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">Templates & Assets</h3>
+          <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Mockups, presets, fonts, and creative resources to speed up your design workflow instantly.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative;">
+          <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
+          
+          <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">Community</h3>
+          <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Learn, share, and grow together with thousands of designers in our private community.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <section class="section reveal quote">
+    <blockquote>
+      I believe professional graphic design should be practical, accessible and industry-focused. Through Creatnprocess, I help designers build real-world creative skills.
+    </blockquote>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section reveal about">
+    <div class="avatar">
+      <img src="profile.png" alt="MD Badar Uddin" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+    </div>
+    <div>
+      <h2>About the Creator</h2>
+      <p><strong>MD Badar Uddin</strong> is the founder of Creatnprocess, a graphic design education platform helping thousands of students learn professional design skills through practical tutorials and creative resources.</p>
+      <p style="color: var(--muted); margin-top: 12px;">With over 10 years of experience in the creative industry, MD Badar Uddin has helped designers worldwide master Photoshop, Illustrator, and professional design workflows through engaging, practical content.</p>
+      <div class="badges">
+        <span>✓ 422K+ Subscribers</span>
+        <span>✓ Founder of Creatnprocess</span>
+        <span>✓ International Audience</span>
+        <span>✓ Graphic Design Educator</span>
+      </div>
+      <a href="founder.html" style="display:inline-block; margin-top: 20px; color: var(--a); text-decoration: none; font-weight: 600; transition: all 0.3s; border: 1px solid rgba(139,92,246,0.3); padding: 10px 24px; border-radius: 12px;">
+        Learn More About MD Badar Uddin →
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== BRANDS ===== -->
+  <section class="section reveal">
+    <h2>Brands &amp; Collaborations</h2>
+    <div class="brands">
+      <div>Adobe</div>
+      <div>Wacom</div>
+      <div>Envato</div>
+      <div>Skillshare</div>
+    </div>
+  </section>
+
+  <!-- ===== WHY BRANDS PARTNER ===== -->
+  <section id="brands" style="padding:80px 8%;text-align:center;width:min(1240px,92%);margin:auto;">
+    <h2>Why Brands Partner With Creatnprocess</h2>
+    <div class="stats-grid">
+      <div class="stat-card">✅ Highly engaged design audience</div>
+      <div class="stat-card">✅ Educational content</div>
+      <div class="stat-card">✅ Global reach</div>
+      <div class="stat-card">✅ Trusted by thousands of designers</div>
+      <div class="stat-card">✅ Long-form tutorials with high watch time</div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section id="testimonials" style="padding:80px 8%;text-align:center;width:min(1240px,92%);margin:auto;">
+    <h2>Testimonials</h2>
+    <div class="stats-grid">
+      <div class="stat-card"><p>"Creatnprocess helped me learn Photoshop from scratch."</p></div>
+      <div class="stat-card"><p>"The tutorials are incredibly practical."</p></div>
+      <div class="stat-card"><p>"One of the best graphic design learning channels."</p></div>
+    </div>
+  </section>
+
+  <!-- ===== TOOLS ===== -->
+  <section id="tools" style="padding:80px 8%;text-align:center;width:min(1240px,92%);margin:auto;">
+    <h2>Tools I Use</h2>
+    <div class="stats-grid">
+      <div class="stat-card">Adobe</div>
+      <div class="stat-card">Wacom</div>
+      <div class="stat-card">Envato</div>
+      <div class="stat-card">Canva</div>
+      <div class="stat-card">Skillshare</div>
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section id="newsletter" style="padding:80px 8%;text-align:center;width:min(1240px,92%);margin:auto;">
+    <h2>Join 10,000+ Designers</h2>
+    <p>Get tutorials, resources and design tips.</p>
+    <form onsubmit="alert('Newsletter signup placeholder');return false;" style="margin-top:20px;">
+      <input type="email" placeholder="Enter your email" style="padding:12px;width:300px;max-width:80%;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:white;font-size:1rem;">
+      <button class="btn primary" type="submit" style="padding:12px 28px;margin-left:10px;">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section reveal contact-section">
+    <div class="contact-card">
+      <div class="contact-content">
+        <h2>Let's Work Together</h2>
+        <p>For sponsorships, partnerships and collaborations.</p>
+        <p class="contact-email">hello@creatnprocess.com</p>
+      </div>
+      <form class="contact-form" onsubmit="alert('Thank you for your inquiry! We will get back to you soon.'); return false;">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <textarea placeholder="Tell me about your project" required></textarea>
+        <button type="submit">Send Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2026 Creatnprocess. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
