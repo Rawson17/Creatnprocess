@@ -1,274 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creatnprocess | Creative Studio & Academy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creatnprocess | Creative Studio & Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="cursor-glow"></div>
 
-  <div class="cursor-glow" id="js-glow"></div>
+<nav id="nav">
+  <div class="brand">Creatnprocess</div>
+  <div class="nav-links"><a href="#home">Home</a>
+    <a href="#tutorials">Tutorials</a>
+    <a href="#showcase">Portfolio</a>
+    <a href="#academy">Academy</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-  <nav id="nav">
-    <div class="brand">Creatnprocess</div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#tutorials">Tutorials</a>
-      <a href="#showcase">Portfolio</a>
-      <a href="#academy">Academy</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+<header id="home" class="hero">
+  <div class="hero-content reveal">
+    <span class="pill">422K+ YouTube Subscribers</span>
+    <h1>Graphic Design Education & Creative Resources</h1>
+    <p>Graphic Designer • Educator • Content Creator helping designers master Photoshop, Illustrator and professional creative workflows.</p>
+    <div class="hero-buttons">
+      <a href="https://youtube.com/@creatnprocess" target="_blank" class="btn primary">Watch YouTube Channel</a>
+      <a href="media-kit.pdf" class="btn secondary">Download Media Kit</a>
     </div>
-  </nav>
+  </div>
+</header>
 
-  <header id="home" class="hero">
-    <div class="hero-content reveal">
-      <span class="pill">422K+ YouTube Subscribers</span>
-      <h1>Graphic Design Education &amp; Creative Resources</h1>
-      <p>Graphic Designer • Educator • Content Creator helping designers master Photoshop, Illustrator and professional creative workflows.</p>
-      <div class="hero-buttons">
-        <a href="https://youtube.com/@creatnprocess" target="_blank" rel="noopener" class="btn primary">Watch YouTube Channel</a>
-        <a href="media-kit.pdf" class="btn secondary">Download Media Kit</a>
-      </div>
+<section class="stats reveal">
+  <div class="stat"><h3>422K+</h3><span>Subscribers</span></div>
+  <div class="stat"><h3>23.8M+</h3><span>Views</span></div>
+  <div class="stat"><h3>386+</h3><span>Tutorials</span></div>
+  <div class="stat"><h3>10,000+</h3><span>Students Helped</span></div>
+  <div class="stat"><h3>10+</h3><span>Years of Expertise</span></div>
+</section>
+
+<section id="tutorials" class="section reveal">
+  <h2>Featured Tutorials</h2>
+  <div class="cards">
+    <div class="card"><div class="thumb">Poster Design</div><h3>Professional Poster Design in Photoshop</h3><p>Create cinematic and commercial posters.</p></div>
+    <div class="card"><div class="thumb">Logo Design</div><h3>Modern Logo Design in Illustrator</h3><p>From sketch to final presentation.</p></div>
+    <div class="card"><div class="thumb">Social Media</div><h3>Social Media Design Masterclass</h3><p>Create engaging content designs.</p></div>
+  </div>
+</section>
+
+<section id="showcase" class="section reveal">
+  <div class="heading-row">
+    <h2>Design Showcase</h2>
+    <div class="filters">
+      <button class="active">All</button>
+      <button>Posters</button>
+      <button>Branding</button>
+      <button>Thumbnails</button>
     </div>
-  </header>
+  </div>
+  <div class="portfolio">
+    <div class="project large"><div class="image">Brand Identity Project</div></div>
+    <div class="project"><div class="image">Poster Project</div></div>
+    <div class="project"><div class="image">Thumbnail Collection</div></div>
+    <div class="project"><div class="image">Photo Manipulation</div></div>
+  </div>
+</section>
 
-  <section class="section reveal">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <h3 class="counter" data-target="422" data-suffix="K+">0</h3>
-        <span>Subscribers</span>
-      </div>
-      <div class="stat-card">
-        <h3 class="counter" data-target="23.8" data-suffix="M+">0</h3>
-        <span>Views</span>
-      </div>
-      <div class="stat-card">
-        <h3 class="counter" data-target="386" data-suffix="+">0</h3>
-        <span>Tutorials</span>
-      </div>
-      <div class="stat-card">
-        <h3 class="counter" data-target="10000" data-suffix="+">0</h3>
-        <span>Students Helped</span>
-      </div>
-      <div class="stat-card">
-        <h3 class="counter" data-target="10" data-suffix="+">0</h3>
-        <span>Years of Expertise</span>
-      </div>
+<section id="academy" class="section reveal">
+  <h2>Academy & Resources</h2>
+  <div class="cards">
+    <div class="card"><h3>Design Courses</h3><p>Premium step-by-step courses.</p></div>
+    <div class="card"><h3>Templates & Assets</h3><p>Mockups, presets and creative resources.</p></div>
+    <div class="card"><h3>Community</h3><p>Learn, share and grow together.</p></div>
+  </div>
+</section>
+
+<section class="section reveal quote">
+  <blockquote>
+    I believe professional graphic design should be practical, accessible and industry-focused. Through Creatnprocess, I help designers build real-world creative skills.</blockquote>
+</section>
+
+<section id="about" class="section reveal about">
+  <div class="avatar">Your Photo</div>
+  <div>
+    <h2>About the Creator</h2>
+    <p>Your Legal Name is the founder of Creatnprocess, a graphic design education platform helping thousands of students learn professional design skills through practical tutorials and creative resources.</p>
+    <div class="badges">
+      <span>✓ 422K+ Subscribers</span>
+      <span>✓ Founder of Creatnprocess</span>
+      <span>✓ International Audience</span>
+      <span>✓ Graphic Design Educator</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="tutorials" class="section reveal">
-    <h2 class="section-title">Featured Tutorials</h2>
-    <div class="grid-three">
-      <div class="card">
-        <div class="thumb-placeholder">Poster Design</div>
-        <h3>Professional Poster Design in Photoshop</h3>
-        <p>Create cinematic and commercial posters.</p>
-      </div>
-      <div class="card">
-        <div class="thumb-placeholder">Logo Design</div>
-        <h3>Modern Logo Design in Illustrator</h3>
-        <p>From sketch to final presentation.</p>
-      </div>
-      <div class="card">
-        <div class="thumb-placeholder">Social Media</div>
-        <h3>Social Media Design Masterclass</h3>
-        <p>Create engaging content designs.</p>
-      </div>
+<section class="section reveal">
+  <h2>Brands & Collaborations</h2>
+  <div class="brands">
+    <div>Adobe</div>
+    <div>Wacom</div>
+    <div>Envato</div>
+    <div>Skillshare</div>
+  </div>
+</section>
+
+
+<section id="brands" style="padding:80px 8%;text-align:center">
+<h2>Why Brands Partner With Creatnprocess</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:30px">
+<div class="stat-card">✅ Highly engaged design audience</div>
+<div class="stat-card">✅ Educational content</div>
+<div class="stat-card">✅ Global reach</div>
+<div class="stat-card">✅ Trusted by thousands of designers</div>
+<div class="stat-card">✅ Long-form tutorials with high watch time</div>
+</div>
+</section>
+
+<section id="testimonials" style="padding:80px 8%;text-align:center">
+<h2>Testimonials</h2>
+<div class="stats-grid">
+<div class="stat-card"><p>"Creatnprocess helped me learn Photoshop from scratch."</p></div>
+<div class="stat-card"><p>"The tutorials are incredibly practical."</p></div>
+<div class="stat-card"><p>"One of the best graphic design learning channels."</p></div>
+</div>
+</section>
+
+<section id="tools" style="padding:80px 8%;text-align:center">
+<h2>Tools I Use</h2>
+<div class="stats-grid">
+<div class="stat-card">Adobe</div>
+<div class="stat-card">Wacom</div>
+<div class="stat-card">Envato</div>
+<div class="stat-card">Canva</div>
+<div class="stat-card">Skillshare</div>
+</div>
+</section>
+
+<section id="newsletter" style="padding:80px 8%;text-align:center">
+<h2>Join 10,000+ Designers</h2>
+<p>Get tutorials, resources and design tips.</p>
+<form onsubmit="alert('Newsletter signup placeholder');return false;">
+<input type="email" placeholder="Enter your email" style="padding:12px;width:300px;max-width:80%">
+<button class="btn" type="submit">Subscribe</button>
+</form>
+</section>
+
+
+
+
+<section id="contact" class="section reveal contact-section">
+  <div class="contact-card">
+    <div class="contact-content">
+      <h2>Let's Work Together</h2>
+      <p>For sponsorships, partnerships and collaborations.</p>
+      <p class="contact-email">hello@creatnprocess.com</p>
     </div>
-  </section>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Email Address">
+      <textarea placeholder="Tell me about your project"></textarea>
+      <button type="button">Send Inquiry</button>
+    </form>
+  </div>
+</section>
 
-  <section id="showcase" class="section reveal">
-    <div class="heading-row">
-      <h2 class="section-title">Design Showcase</h2>
-      <div class="filters">
-        <button class="active">All</button>
-        <button>Posters</button>
-        <button>Branding</button>
-        <button>Thumbnails</button>
-      </div>
-    </div>
-    <div class="portfolio-masonry">
-      <div class="project wide"><div class="image-fill">Brand Identity Project</div></div>
-      <div class="project"><div class="image-fill">Poster Project</div></div>
-      <div class="project"><div class="image-fill">Thumbnail Collection</div></div>
-      <div class="project wide"><div class="image-fill">Photo Manipulation</div></div>
-    </div>
-  </section>
+<footer>
+  <p>© 2026 Creatnprocess. All Rights Reserved.</p>
+</footer>
 
-  <section id="academy" class="section reveal">
-    <h2 class="section-title">Academy &amp; Resources</h2>
-    <div class="grid-three">
-      <div class="card academy-card">
-        <h3>Design Courses</h3>
-        <p>Premium step-by-step courses covering professional design app frameworks.</p>
-      </div>
-      <div class="card academy-card">
-        <h3>Templates &amp; Assets</h3>
-        <p>Mockups, presets, custom fonts and asset resource systems to build speed workflows.</p>
-      </div>
-      <div class="card academy-card">
-        <h3>Community</h3>
-        <p>Learn, critique work, share source files, and grow together inside the network.</p>
-      </div>
-    </div>
-  </section>
 
-  <section class="section reveal text-center">
-    <div class="quote-container">
-      <blockquote>
-        "I believe professional graphic design should be practical, accessible and industry-focused. Through Creatnprocess, I help designers build real-world creative skills."
-      </blockquote>
-    </div>
-  </section>
+<script src="script.js"></script>
 
-  <section id="about" class="section reveal">
-    <div class="about-grid">
-      <div class="avatar-frame">Your Photo</div>
-      <div class="about-info">
-        <h2 class="section-title">About the Creator</h2>
-        <p>Your Legal Name is the founder of Creatnprocess, a graphic design education platform helping thousands of students learn professional design skills through practical tutorials and creative resources.</p>
-        <div class="badges-row">
-          <span class="badge">✓ 422K+ Subscribers</span>
-          <span class="badge">✓ Founder of Creatnprocess</span>
-          <span class="badge">✓ International Audience</span>
-          <span class="badge">✓ Graphic Design Educator</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section reveal">
-    <h2 class="section-title text-center">Brands &amp; Collaborations</h2>
-    <div class="brands-strip">
-      <div class="brand-item">Adobe</div>
-      <div class="brand-item">Wacom</div>
-      <div class="brand-item">Envato</div>
-      <div class="brand-item">Skillshare</div>
-    </div>
-  </section>
-
-  <section id="brands" class="section reveal">
-    <h2 class="section-title text-center">Why Brands Partner With Creatnprocess</h2>
-    <div class="grid-three margin-top-md">
-      <div class="card feature-card">✅ Highly engaged design audience</div>
-      <div class="card feature-card">✅ Educational content integrations</div>
-      <div class="card feature-card">✅ Clear global market reach</div>
-      <div class="card feature-card">✅ Trusted by thousands of designers</div>
-      <div class="card feature-card">✅ High analytics video watch time</div>
-    </div>
-  </section>
-
-  <section id="testimonials" class="section reveal">
-    <h2 class="section-title text-center">Testimonials</h2>
-    <div class="grid-three margin-top-md">
-      <div class="card review-card"><p>"Creatnprocess helped me learn Photoshop from scratch completely."</p></div>
-      <div class="card review-card"><p>"The design assignments and video tutorials are incredibly practical."</p></div>
-      <div class="card review-card"><p>"One of the best vector graphic design learning channels online."</p></div>
-    </div>
-  </section>
-
-  <section id="tools" class="section reveal">
-    <h2 class="section-title text-center">Tools I Use</h2>
-    <div class="brands-strip margin-top-md">
-      <div class="brand-item">Adobe</div>
-      <div class="brand-item">Wacom</div>
-      <div class="brand-item">Envato</div>
-      <div class="brand-item">Canva</div>
-      <div class="brand-item">Skillshare</div>
-    </div>
-  </section>
-
-  <section id="newsletter" class="section reveal">
-    <div class="card newsletter-box">
-      <h2 class="section-title">Join 10,000+ Designers</h2>
-      <p class="section-subtitle">Get tutorials, design freebie assets, and master tips dropped weekly.</p>
-      <form class="newsletter-inline" onsubmit="alert('Newsletter signup placeholder'); return false;">
-        <input type="email" placeholder="Enter your email address" required aria-label="Email Field">
-        <button class="btn primary" type="submit">Subscribe</button>
-      </form>
-    </div>
-  </section>
-
-  <section id="contact" class="section reveal">
-    <div class="contact-card">
-      <div class="contact-content">
-        <h2>Let's Work Together</h2>
-        <p>For strategic channel sponsorships, business collaborations, or resource partnerships.</p>
-        <span class="contact-email">hello@creatnprocess.com</span>
-      </div>
-      <form class="contact-form" onsubmit="alert('Thank you for reaching out!'); return false;">
-        <input type="text" placeholder="Your Name" required aria-label="Your name identification">
-        <input type="email" placeholder="Email Address" required aria-label="Electronic transmission mail handle">
-        <textarea placeholder="Tell me about your project scope context..." required aria-label="Inquiry description matrix text area"></textarea>
-        <button type="submit" class="btn primary">Send Inquiry</button>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2026 Creatnprocess. All Rights Reserved.</p>
-  </footer>
-
-  <script src="script.js"></script>
-
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Structural Interactivity Cursor & Form Action Handlers
-    const glowObject = document.getElementById('js-glow');
-    if (glowObject) {
-      window.addEventListener('mousemove', function(e) {
-        glowObject.style.left = e.clientX + 'px';
-        glowObject.style.top = e.clientY + 'px';
-      });
-    }
-
-    document.querySelectorAll('button, .btn, a.btn').forEach(el => {
-      el.addEventListener('click', function(e) {
-        this.classList.add('btn-click');
-        setTimeout(() => this.classList.remove('btn-click'), 180);
-      });
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('button, .btn, a.btn').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', function(e){
+      if (!this.getAttribute('href') || this.getAttribute('href') === '#') {
+        e.preventDefault();
+      }
+      this.classList.add('btn-click');
+      setTimeout(() => this.classList.remove('btn-click'), 180);
     });
-
-    // Metric Counting Performance Script
-    const counterElements = document.querySelectorAll('.counter');
-    const displayObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const targetValue = parseFloat(el.dataset.target);
-        const appendSuffix = el.dataset.suffix || '';
-        let initialVal = 0;
-        const frameIncrement = targetValue / 80;
-
-        function renderFrame() {
-          initialVal += frameIncrement;
-          if (initialVal < targetValue) {
-            if (targetValue === 23.8) {
-              el.innerText = initialVal.toFixed(1) + appendSuffix;
-            } else {
-              el.innerText = Math.floor(initialVal).toLocaleString() + appendSuffix;
-            }
-            requestAnimationFrame(renderFrame);
-          } else {
-            if (targetValue === 23.8) el.innerText = '23.8M+';
-            else if (targetValue === 422) el.innerText = '422K+';
-            else el.innerText = targetValue.toLocaleString() + appendSuffix;
-          }
-        }
-        renderFrame();
-        displayObserver.unobserve(el);
-      });
-    }, { threshold: 0.1 });
-
-    counterElements.forEach(counter => displayObserver.observe(counter));
   });
-  </script>
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ const counters=document.querySelectorAll('.counter');
+ const observer=new IntersectionObserver(entries=>{
+   entries.forEach(entry=>{
+     if(!entry.isIntersecting) return;
+     const el=entry.target;
+     const target=parseFloat(el.dataset.target);
+     const suffix=el.dataset.suffix||'';
+     let current=0;
+     const step=target/80;
+     function update(){
+       current+=step;
+       if(current<target){
+         if(target===23.8){el.innerText=current.toFixed(1)+suffix;}
+         else {el.innerText=Math.floor(current).toLocaleString()+suffix;}
+         requestAnimationFrame(update);
+       } else {
+         if(target===23.8) el.innerText='23.8M+';
+         else if(target===422) el.innerText='422K+';
+         else el.innerText=target.toLocaleString()+suffix;
+       }
+     }
+     update();
+     observer.unobserve(el);
+   });
+ });
+ counters.forEach(c=>observer.observe(c));
+});
+</script>
+
 
 </body>
 </html>
