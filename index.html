@@ -14,16 +14,18 @@
 
     <!-- ===== NAVIGATION ===== -->
     <nav id="nav">
-    <div class="brand">Creatnprocess</div>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="index.html#TUTORIALS">Tutorials</a>
-        <a href="index.html#showcase">Portfolio</a>
-        <a href="index.html#academy">Academy</a>
-        <a href="founder.html">About</a>
-        <a href="index.html#contact">Contact</a>
-    </div>
-</nav>
+        <div class="brand">Creatnprocess</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="assets.html">Assets</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#showcase">Portfolio</a>
+            <a href="founder.html">About</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
 
     <!-- ===== HERO ===== -->
     <header id="home" class="hero">
@@ -74,66 +76,80 @@
         <div class="heading-row">
             <h2>Design Showcase</h2>
             <div class="filters">
-                <button class="active">All</button>
-                <button>Posters</button>
-                <button>Branding</button>
-                <button>Thumbnails</button>
+                <button class="active" data-filter="all">All</button>
+                <button data-filter="posters">Posters</button>
+                <button data-filter="branding">Branding</button>
+                <button data-filter="thumbnails">Thumbnails</button>
             </div>
         </div>
         <div class="portfolio">
-            <div class="project large"><div class="image">Brand Identity Project</div></div>
-            <div class="project"><div class="image">Poster Project</div></div>
-            <div class="project"><div class="image">Thumbnail Collection</div></div>
-            <div class="project"><div class="image">Photo Manipulation</div></div>
+            <div class="project large" data-category="branding"><div class="image">Brand Identity Project</div></div>
+            <div class="project" data-category="posters"><div class="image">Poster Project</div></div>
+            <div class="project" data-category="thumbnails"><div class="image">Thumbnail Collection</div></div>
+            <div class="project" data-category="posters"><div class="image">Photo Manipulation</div></div>
         </div>
     </section>
 
-  <!-- ===== ACADEMY & RESOURCES ===== -->
-<section id="academy" class="section reveal" style="position:relative; overflow:hidden;">
-    <div style="position:absolute; top:-150px; right:-150px; width:600px; height:600px; background:radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%); border-radius:50%; pointer-events:none; z-index:0;"></div>
-    <div style="position:relative; z-index:1;">
-        <h2 style="text-align:center; font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 10px;">Academy & Resources</h2>
-        <p style="text-align:center; color: var(--muted); font-size: 1.1rem; margin-bottom: 40px;">Everything you need to master professional graphic design.</p>
-        
-        <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
+    <!-- ===== ACADEMY & RESOURCES ===== -->
+    <section id="academy" class="section reveal" style="position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-150px; right:-150px; width:600px; height:600px; background:radial-gradient(circle, rgba(139,92,246,0.08), transparent 70%); border-radius:50%; pointer-events:none; z-index:0;"></div>
+        <div style="position:relative; z-index:1;">
+            <h2 style="text-align:center; font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 10px;">Academy & Resources</h2>
+            <p style="text-align:center; color: var(--muted); font-size: 1.1rem; margin-bottom: 40px;">Everything you need to master professional graphic design.</p>
             
-            <!-- Card 1 - Design Courses -->
-            <a href="courses.html" style="text-decoration:none;color:inherit;display:block;">
-                <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative; cursor:pointer;">
-                    <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
-                    <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">🎓 Design Courses</h3>
-                    <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Premium step-by-step courses covering Photoshop, Illustrator, and professional design workflows.</p>
-                    <span style="display:inline-block;margin-top:16px;padding-left:16px;color:var(--a);font-weight:600;">Browse Courses →</span>
-                </div>
-            </a>
+            <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
+                
+                <!-- Card 1 - Design Courses -->
+                <a href="courses.html" style="text-decoration:none;color:inherit;display:block;">
+                    <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative; cursor:pointer;">
+                        <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
+                        <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">🎓 Design Courses</h3>
+                        <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Premium step-by-step courses covering Photoshop, Illustrator, and professional design workflows.</p>
+                        <span style="display:inline-block;margin-top:16px;padding-left:16px;color:var(--a);font-weight:600;">Browse Courses →</span>
+                    </div>
+                </a>
 
-            <!-- Card 2 - Templates & Assets (Now links to assets.html) -->
-            <a href="assets.html" style="text-decoration:none;color:inherit;display:block;">
-                <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative; cursor:pointer;">
-                    <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
-                    <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">📦 Templates & Assets</h3>
-                    <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Mockups, presets, fonts, and creative resources to speed up your design workflow instantly.</p>
-                    <span style="display:inline-block;margin-top:16px;padding-left:16px;color:var(--a);font-weight:600;">Browse Assets →</span>
-                </div>
-            </a>
+                <!-- Card 2 - Templates & Assets -->
+                <a href="assets.html" style="text-decoration:none;color:inherit;display:block;">
+                    <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative; cursor:pointer;">
+                        <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
+                        <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">📦 Templates & Assets</h3>
+                        <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Mockups, presets, fonts, and creative resources to speed up your design workflow instantly.</p>
+                        <span style="display:inline-block;margin-top:16px;padding-left:16px;color:var(--a);font-weight:600;">Browse Assets →</span>
+                    </div>
+                </a>
 
-            <!-- Card 3 - Community -->
-            <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative;">
-                <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
-                <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">👥 Community</h3>
-                <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Learn, share, and grow together with thousands of designers in our private community.</p>
+                <!-- Card 3 - Community -->
+                <div class="card" style="text-align:left; padding: 32px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative;">
+                    <div style="position:absolute; left:0; top:30px; bottom:30px; width:3px; background:linear-gradient(180deg, var(--a), var(--b)); border-radius:4px;"></div>
+                    <h3 style="margin:0 0 12px 0; font-size:1.3rem; padding-left:16px;">👥 Community</h3>
+                    <p style="color: var(--muted); font-size:0.95rem; line-height:1.6; margin:0; padding-left:16px;">Learn, share, and grow together with thousands of designers in our private community.</p>
+                </div>
+
             </div>
-
         </div>
-    </div>
-</section>
-
+    </section>
 
     <!-- ===== QUOTE ===== -->
     <section class="section reveal quote">
         <blockquote>
             I believe professional graphic design should be practical, accessible and industry-focused. Through Creatnprocess, I help designers build real-world creative skills.
         </blockquote>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section reveal about">
+        <div class="avatar">Your Photo</div>
+        <div>
+            <h2>About the Creator</h2>
+            <p>Your Legal Name is the founder of Creatnprocess, a graphic design education platform helping thousands of students learn professional design skills through practical tutorials and creative resources.</p>
+            <div class="badges">
+                <span>✓ 422K+ Subscribers</span>
+                <span>✓ Founder of Creatnprocess</span>
+                <span>✓ International Audience</span>
+                <span>✓ Graphic Design Educator</span>
+            </div>
+        </div>
     </section>
 
     <!-- ===== BRANDS ===== -->
@@ -214,5 +230,86 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // ===== PORTFOLIO FILTER FUNCTIONALITY =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filters button');
+            const projects = document.querySelectorAll('.project');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+
+                    projects.forEach(project => {
+                        const category = project.dataset.category || '';
+                        if (filter === 'all' || category === filter) {
+                            project.style.display = 'block';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // ===== SMOOTH SCROLL FOR NAV LINKS =====
+            document.querySelectorAll('.nav-links a, a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#') && href.length > 1) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const targetEl = document.getElementById(targetId);
+                        if (targetEl) {
+                            const navHeight = document.querySelector('nav').offsetHeight || 80;
+                            const targetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 20;
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // ===== BUTTON CLICK EFFECT =====
+            document.querySelectorAll('button, .btn, a.btn').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.add('btn-click');
+                    setTimeout(() => {
+                        this.classList.remove('btn-click');
+                    }, 180);
+                });
+            });
+
+            // ===== CURSOR GLOW =====
+            const glow = document.querySelector('.cursor-glow');
+            if (glow) {
+                document.addEventListener('mousemove', function(e) {
+                    glow.style.left = e.clientX + 'px';
+                    glow.style.top = e.clientY + 'px';
+                });
+            }
+
+            // ===== SCROLL REVEAL =====
+            const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal').forEach(function(el) {
+                revealObserver.observe(el);
+            });
+
+            console.log('✅ Creatnprocess - Homepage loaded successfully!');
+            console.log('📚 Pages available: Home, Courses, Assets, Blog, Founder, Checkout');
+        });
+    </script>
 </body>
 </html>
