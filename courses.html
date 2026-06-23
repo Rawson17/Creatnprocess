@@ -221,6 +221,16 @@
             transform: none;
             box-shadow: none;
         }
+        .course-card .btn-small.in-cart {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            cursor: default;
+        }
+        .course-card .btn-small.in-cart:hover {
+            transform: none;
+            box-shadow: none;
+        }
 
         .course-card .featured-tag {
             position: absolute;
@@ -235,6 +245,9 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             z-index: 2;
+        }
+        .course-card .featured-tag.new {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
         }
 
         .course-card .progress-bar {
@@ -261,7 +274,129 @@
             gap: 6px;
         }
 
-        /* Featured Course */
+        /* ===== CART COUNTER WITH CHECKOUT BUTTON ===== */
+        .cart-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 16px 20px;
+            border-radius: 16px;
+            background: rgba(6, 8, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-weight: 500;
+            z-index: 9999;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            min-width: 160px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .cart-counter:hover {
+            transform: scale(1.02);
+        }
+        .cart-counter .cart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .cart-counter .cart-header .cart-icon {
+            font-size: 1.2rem;
+        }
+        .cart-counter .cart-header .cart-label {
+            font-size: 0.9rem;
+            flex: 1;
+        }
+        .cart-counter .cart-header .cart-badge {
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            border-radius: 999px;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            min-width: 24px;
+            text-align: center;
+        }
+        .cart-counter .cart-header .cart-total {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        .cart-counter .checkout-btn-cart {
+            width: 100%;
+            padding: 10px 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .cart-counter .checkout-btn-cart:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+        .cart-counter .checkout-btn-cart:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .cart-counter .checkout-btn-cart:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            padding: 16px 28px;
+            border-radius: 16px;
+            background: rgba(6, 8, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            font-size: 0.95rem;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast .toast-icon {
+            margin-right: 10px;
+        }
+        .toast.success {
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        .toast.success .toast-icon {
+            color: #4ade80;
+        }
+        .toast.error {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .toast.error .toast-icon {
+            color: #f87171;
+        }
+        .toast.info {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        .toast.info .toast-icon {
+            color: #60a5fa;
+        }
+
+        /* ===== FEATURED COURSE ===== */
         .featured-course {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -363,83 +498,23 @@
             gap: 6px;
         }
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 16px 28px;
-            border-radius: 16px;
-            background: rgba(6, 8, 22, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            font-weight: 500;
-            z-index: 10000;
-            transform: translateY(120px);
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .toast .toast-icon {
-            margin-right: 10px;
-        }
-        .toast.success {
-            border-color: rgba(34, 197, 94, 0.3);
-        }
-        .toast.success .toast-icon {
-            color: #4ade80;
-        }
-        .toast.error {
-            border-color: rgba(239, 68, 68, 0.3);
-        }
-        .toast.error .toast-icon {
-            color: #f87171;
-        }
-
-        /* Cart Counter */
-        .cart-counter {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            padding: 14px 24px;
-            border-radius: 16px;
-            background: rgba(6, 8, 22, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            font-weight: 500;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .cart-counter:hover {
-            transform: scale(1.05);
-        }
-        .cart-counter .cart-badge {
-            background: linear-gradient(90deg, var(--a), var(--b));
-            color: white;
-            border-radius: 999px;
-            padding: 2px 10px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            min-width: 24px;
+        /* ===== NO RESULTS ===== */
+        .no-results {
             text-align: center;
-        }
-        .cart-counter .cart-total {
+            padding: 60px 20px;
             color: var(--muted);
-            font-size: 0.9rem;
+            display: none;
+        }
+        .no-results.show {
+            display: block;
+        }
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
         }
 
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
             .featured-course {
                 grid-template-columns: 1fr;
@@ -454,11 +529,12 @@
             .cart-counter {
                 bottom: 20px;
                 left: 20px;
-                padding: 10px 16px;
-                font-size: 0.85rem;
+                right: 20px;
+                min-width: auto;
+                padding: 14px 16px;
             }
             .toast {
-                bottom: 80px;
+                bottom: 100px;
                 right: 20px;
                 left: 20px;
                 max-width: none;
@@ -477,22 +553,13 @@
             .course-card .btn-small {
                 text-align: center;
             }
-        }
-
-        /* No results message */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--muted);
-            display: none;
-        }
-        .no-results.show {
-            display: block;
-        }
-        .no-results h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--text);
+            .cart-counter .cart-header {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .cart-counter .cart-header .cart-total {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -503,15 +570,20 @@
     <!-- ===== TOAST NOTIFICATION ===== -->
     <div class="toast" id="toast">
         <span class="toast-icon">✅</span>
-        <span class="toast-message">Course enrolled successfully!</span>
+        <span class="toast-message">Action completed successfully!</span>
     </div>
 
-    <!-- ===== CART COUNTER ===== -->
-    <div class="cart-counter" id="cartCounter" onclick="toggleCart()">
-        <span>🛒</span>
-        <span>Cart</span>
-        <span class="cart-badge" id="cartBadge">0</span>
-        <span class="cart-total" id="cartTotal">$0</span>
+    <!-- ===== CART COUNTER WITH CHECKOUT BUTTON ===== -->
+    <div class="cart-counter" id="cartCounter">
+        <div class="cart-header">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-label">Cart</span>
+            <span class="cart-badge" id="cartBadge">0</span>
+            <span class="cart-total" id="cartTotal">$0</span>
+        </div>
+        <button class="checkout-btn-cart" id="checkoutBtnCart" disabled onclick="proceedToCheckout()">
+            Proceed to Checkout →
+        </button>
     </div>
 
     <!-- ===== NAVIGATION ===== -->
@@ -519,10 +591,11 @@
         <div class="brand">Creatnprocess</div>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="courses.html">Courses</a>
+            <a href="courses.html" style="color:var(--a);">Courses</a>
             <a href="blog.html">Blog</a>
             <a href="index.html#showcase">Portfolio</a>
             <a href="founder.html">About</a>
+            <a href="checkout.html">Checkout</a>
             <a href="index.html#contact">Contact</a>
         </div>
     </nav>
@@ -589,7 +662,9 @@
 
     <script src="script.js"></script>
     <script>
-        // ===== COURSE DATA =====
+        // ============================================================
+        // COURSE DATA
+        // ============================================================
         const courses = [{
             id: 1,
             title: "Photoshop for Beginners",
@@ -720,21 +795,24 @@
             new: false
         }];
 
-        // ===== SHOPPING CART =====
+        // ============================================================
+        // STATE MANAGEMENT
+        // ============================================================
         let cart = [];
         let enrolledCourses = new Set();
 
-        // ===== TOAST SYSTEM =====
+        // ============================================================
+        // TOAST SYSTEM
+        // ============================================================
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const messageEl = toast.querySelector('.toast-message');
             const iconEl = toast.querySelector('.toast-icon');
             
             toast.className = 'toast ' + type;
-            iconEl.textContent = type === 'success' ? '✅' : '❌';
+            iconEl.textContent = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
             messageEl.textContent = message;
             
-            // Reset animation
             toast.classList.remove('show');
             setTimeout(() => {
                 toast.classList.add('show');
@@ -743,44 +821,53 @@
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 3500);
         }
 
-        // ===== CART FUNCTIONS =====
+        // ============================================================
+        // CART FUNCTIONS
+        // ============================================================
         function updateCartUI() {
             const badge = document.getElementById('cartBadge');
             const totalEl = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtnCart');
             
             badge.textContent = cart.length;
             
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            totalEl.textContent = '$' + total;
+            totalEl.textContent = '$' + total.toFixed(0);
+            
+            // Enable/disable checkout button
+            checkoutBtn.disabled = cart.length === 0;
             
             // Animate badge
             badge.style.transform = 'scale(1.3)';
             setTimeout(() => {
                 badge.style.transform = 'scale(1)';
             }, 200);
+            
+            // Save to localStorage
+            localStorage.setItem('creatnprocess_cart', JSON.stringify(cart));
         }
 
-        function toggleCart() {
+        function proceedToCheckout() {
             if (cart.length === 0) {
-                showToast('Your cart is empty. Start exploring courses!', 'error');
+                showToast('Your cart is empty. Add some courses first!', 'error');
                 return;
             }
             
-            const courseNames = cart.map(c => c.title).join('\n• ');
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const message = `🛒 Your Cart:\n• ${courseNames}\n\nTotal: $${total}\n\nClick OK to checkout (demo)`;
+            // Save cart before navigating
+            localStorage.setItem('creatnprocess_cart', JSON.stringify(cart));
             
-            if (confirm(message)) {
-                // Checkout simulation
-                enrolledCourses = new Set([...enrolledCourses, ...cart.map(c => c.id)]);
-                showToast(`🎉 Successfully enrolled in ${cart.length} course(s)!`, 'success');
-                cart = [];
-                updateCartUI();
-                renderCourses();
-            }
+            // Show loading state on button
+            const btn = document.getElementById('checkoutBtnCart');
+            const originalText = btn.textContent;
+            btn.textContent = '⏳ Redirecting...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                window.location.href = 'checkout.html';
+            }, 500);
         }
 
         function enrollCourse(courseId) {
@@ -788,12 +875,12 @@
             if (!course) return;
             
             if (enrolledCourses.has(courseId)) {
-                showToast(`You're already enrolled in "${course.title}"`, 'error');
+                showToast(`You're already enrolled in "${course.title}"`, 'info');
                 return;
             }
             
             if (cart.some(c => c.id === courseId)) {
-                showToast(`"${course.title}" is already in your cart`, 'error');
+                showToast(`"${course.title}" is already in your cart`, 'info');
                 return;
             }
             
@@ -809,11 +896,13 @@
         }
 
         function enrollFeatured() {
-            const featuredCourse = courses[0]; // Use first course as featured
-            enrollCourse(featuredCourse.id);
+            // Use the masterclass as featured (id 1)
+            enrollCourse(1);
         }
 
-        // ===== RENDER COURSES =====
+        // ============================================================
+        // RENDER COURSES
+        // ============================================================
         function renderCourses(filter = 'all') {
             const grid = document.getElementById('coursesGrid');
             const noResults = document.getElementById('noResults');
@@ -843,14 +932,14 @@
                 if (isEnrolled) {
                     buttonHTML = `<button class="btn-small enrolled" disabled>✅ Enrolled</button>`;
                 } else if (inCart) {
-                    buttonHTML = `<button class="btn-small" style="background:rgba(251,191,36,0.2);color:#fbbf24;border:1px solid rgba(251,191,36,0.2);" onclick="enrollCourse(${course.id})">📦 In Cart</button>`;
+                    buttonHTML = `<button class="btn-small in-cart" disabled>📦 In Cart</button>`;
                 } else {
-                    buttonHTML = `<button class="btn-small" onclick="enrollCourse(${course.id})">Enroll Now</button>`;
+                    buttonHTML = `<button class="btn-small" onclick="enrollCourse(${course.id})">Add to Cart</button>`;
                 }
                 
                 const tags = [];
                 if (course.bestSeller) tags.push(`<span class="featured-tag">⭐ Best Seller</span>`);
-                if (course.new) tags.push(`<span class="featured-tag" style="background:linear-gradient(90deg, #3b82f6, #8b5cf6);">🆕 New</span>`);
+                if (course.new) tags.push(`<span class="featured-tag new">🆕 New</span>`);
                 
                 return `
                     <div class="course-card" data-level="${course.level}" data-category="${course.category}">
@@ -888,9 +977,19 @@
             });
         }
 
-        // ===== FILTER SYSTEM =====
+        // ============================================================
+        // FILTER SYSTEM
+        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             const filterButtons = document.querySelectorAll('.course-filters button');
+            
+            // Load saved state
+            try {
+                const savedCart = JSON.parse(localStorage.getItem('creatnprocess_cart') || '[]');
+                const savedEnrolled = JSON.parse(localStorage.getItem('creatnprocess_enrolled') || '[]');
+                if (Array.isArray(savedCart)) cart = savedCart;
+                if (Array.isArray(savedEnrolled)) enrolledCourses = new Set(savedEnrolled);
+            } catch (e) {}
             
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -906,33 +1005,50 @@
             renderCourses('all');
             updateCartUI();
             
-            // Load saved cart from localStorage
-            try {
-                const savedCart = JSON.parse(localStorage.getItem('creatnprocess_cart') || '[]');
-                const savedEnrolled = JSON.parse(localStorage.getItem('creatnprocess_enrolled') || '[]');
-                if (Array.isArray(savedCart)) cart = savedCart;
-                if (Array.isArray(savedEnrolled)) enrolledCourses = new Set(savedEnrolled);
-                updateCartUI();
-                renderCourses();
-            } catch (e) {}
-            
-            // Save cart to localStorage on changes
-            setInterval(() => {
-                localStorage.setItem('creatnprocess_cart', JSON.stringify(cart));
-                localStorage.setItem('creatnprocess_enrolled', JSON.stringify([...enrolledCourses]));
-            }, 1000);
+            // Listen for storage changes from other tabs
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'creatnprocess_cart') {
+                    try {
+                        cart = JSON.parse(e.newValue || '[]');
+                        updateCartUI();
+                        renderCourses();
+                    } catch (e) {}
+                }
+                if (e.key === 'creatnprocess_enrolled') {
+                    try {
+                        enrolledCourses = new Set(JSON.parse(e.newValue || '[]'));
+                        renderCourses();
+                    } catch (e) {}
+                }
+            });
         });
 
-        // ===== KEYBOARD SHORTCUTS =====
+        // ============================================================
+        // KEYBOARD SHORTCUTS
+        // ============================================================
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'c' || e.key === 'C') {
-                toggleCart();
+            // Press 'C' to proceed to checkout
+            if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey) {
+                if (document.activeElement?.tagName !== 'INPUT' && 
+                    document.activeElement?.tagName !== 'TEXTAREA') {
+                    proceedToCheckout();
+                }
             }
         });
 
+        // ============================================================
+        // EXPOSE FUNCTIONS GLOBALLY
+        // ============================================================
+        window.enrollCourse = enrollCourse;
+        window.enrollFeatured = enrollFeatured;
+        window.proceedToCheckout = proceedToCheckout;
+        window.renderCourses = renderCourses;
+        window.showToast = showToast;
+
         console.log('🎓 Creatnprocess Academy - Courses Loaded!');
         console.log(`📚 ${courses.length} courses available`);
-        console.log('💡 Press "C" to toggle cart');
+        console.log(`🛒 ${cart.length} items in cart`);
+        console.log('💡 Press "C" to proceed to checkout');
     </script>
 </body>
 </html>
