@@ -348,6 +348,14 @@ h2 {
   font-size: 0.85rem;
   font-weight: 500;
 }
+/* ===== ABOUT SECTION LINK ===== */
+.about a[href="founder.html"]:hover {
+  background: linear-gradient(90deg, var(--a), var(--b));
+  color: white !important;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+}
 
 /* ===== BRANDS ===== */
 .brands {
