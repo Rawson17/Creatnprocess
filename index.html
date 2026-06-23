@@ -70,23 +70,128 @@
   </section>
 
   <!-- ===== SHOWCASE ===== -->
-  <section id="showcase" class="section reveal">
-    <div class="heading-row">
-      <h2>Design Showcase</h2>
-      <div class="filters">
-        <button class="active">All</button>
-        <button>Posters</button>
-        <button>Branding</button>
-        <button>Thumbnails</button>
+<section id="showcase" class="section reveal">
+  <div class="heading-row">
+    <h2>Design Showcase</h2>
+    <div class="filters">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="posters">Posters</button>
+      <button data-filter="branding">Branding</button>
+      <button data-filter="thumbnails">Thumbnails</button>
+    </div>
+  </div>
+  <div class="portfolio" id="portfolioGrid">
+    <!-- All Projects - Visible when "All" is selected -->
+    
+    <!-- Project 1 - Brand Identity (Branding) -->
+    <div class="project large" data-category="branding">
+      <div class="image" style="background: linear-gradient(135deg, #7c3aed, #06b6d4);">
+        <span style="position:relative;z-index:1;font-size:2rem;">🏷️</span>
+        <div class="project-overlay">
+          <h4>Brand Identity Project</h4>
+          <p>Complete brand identity for a modern startup</p>
+          <span class="project-tag">Branding</span>
+        </div>
       </div>
     </div>
-    <div class="portfolio">
-      <div class="project large"><div class="image">Brand Identity Project</div></div>
-      <div class="project"><div class="image">Poster Project</div></div>
-      <div class="project"><div class="image">Thumbnail Collection</div></div>
-      <div class="project"><div class="image">Photo Manipulation</div></div>
+
+    <!-- Project 2 - Poster Project (Posters) -->
+    <div class="project" data-category="posters">
+      <div class="image" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+        <span style="position:relative;z-index:1;font-size:2rem;">🎬</span>
+        <div class="project-overlay">
+          <h4>Poster Project</h4>
+          <p>Cinematic movie poster design</p>
+          <span class="project-tag">Poster</span>
+        </div>
+      </div>
     </div>
-  </section>
+
+    <!-- Project 3 - Thumbnail Collection (Thumbnails) -->
+    <div class="project" data-category="thumbnails">
+      <div class="image" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">
+        <span style="position:relative;z-index:1;font-size:2rem;">▶️</span>
+        <div class="project-overlay">
+          <h4>Thumbnail Collection</h4>
+          <p>Engaging YouTube thumbnail designs</p>
+          <span class="project-tag">Thumbnail</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 - Photo Manipulation (Posters) -->
+    <div class="project" data-category="posters">
+      <div class="image" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+        <span style="position:relative;z-index:1;font-size:2rem;">📸</span>
+        <div class="project-overlay">
+          <h4>Photo Manipulation</h4>
+          <p>Advanced photo compositing and retouching</p>
+          <span class="project-tag">Poster</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5 - Logo Design (Branding) -->
+    <div class="project" data-category="branding">
+      <div class="image" style="background: linear-gradient(135deg, #8b5cf6, #f472b6);">
+        <span style="position:relative;z-index:1;font-size:2rem;">🖌️</span>
+        <div class="project-overlay">
+          <h4>Logo Design</h4>
+          <p>Minimalist logo designs for various brands</p>
+          <span class="project-tag">Branding</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 6 - Social Media Templates (Thumbnails) -->
+    <div class="project" data-category="thumbnails">
+      <div class="image" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">
+        <span style="position:relative;z-index:1;font-size:2rem;">📱</span>
+        <div class="project-overlay">
+          <h4>Social Media Templates</h4>
+          <p>Engaging social media post designs</p>
+          <span class="project-tag">Thumbnail</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 7 - Packaging Design (Branding) -->
+    <div class="project" data-category="branding">
+      <div class="image" style="background: linear-gradient(135deg, #f59e0b, #f97316);">
+        <span style="position:relative;z-index:1;font-size:2rem;">📦</span>
+        <div class="project-overlay">
+          <h4>Packaging Design</h4>
+          <p>Creative product packaging and labeling</p>
+          <span class="project-tag">Branding</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 8 - Event Poster (Posters) -->
+    <div class="project" data-category="posters">
+      <div class="image" style="background: linear-gradient(135deg, #8b5cf6, #06b6d4);">
+        <span style="position:relative;z-index:1;font-size:2rem;">🎨</span>
+        <div class="project-overlay">
+          <h4>Event Poster</h4>
+          <p>Music festival and event posters</p>
+          <span class="project-tag">Poster</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 9 - YouTube Channel Art (Thumbnails) -->
+    <div class="project" data-category="thumbnails">
+      <div class="image" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+        <span style="position:relative;z-index:1;font-size:2rem;">🎯</span>
+        <div class="project-overlay">
+          <h4>Channel Art & Banners</h4>
+          <p>Complete YouTube channel branding</p>
+          <span class="project-tag">Thumbnail</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- ===== ACADEMY & RESOURCES (ICON-FREE MINIMALIST) ===== -->
   <section id="academy" class="section reveal" style="position:relative; overflow:hidden;">
