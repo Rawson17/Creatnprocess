@@ -51,29 +51,32 @@
     });
   });
 
-  // ---- Portfolio Filter Functionality ----
+    // ---- Portfolio Filter Functionality ----
   const filterButtons = document.querySelectorAll('.filters button');
   const projects = document.querySelectorAll('.project');
 
   filterButtons.forEach(function(button) {
     button.addEventListener('click', function() {
+      // Update active button
       filterButtons.forEach(function(btn) {
         btn.classList.remove('active');
       });
       this.classList.add('active');
 
-      const filter = this.textContent.toLowerCase();
+      const filter = this.dataset.filter;
 
       projects.forEach(function(project) {
-        const projectText = project.querySelector('.image')?.textContent?.toLowerCase() || '';
         const category = project.dataset.category || '';
 
         if (filter === 'all') {
           project.style.display = 'block';
-        } else if (projectText.includes(filter) || category.includes(filter)) {
+          project.classList.remove('hidden');
+        } else if (category === filter) {
           project.style.display = 'block';
+          project.classList.remove('hidden');
         } else {
           project.style.display = 'none';
+          project.classList.add('hidden');
         }
       });
     });
