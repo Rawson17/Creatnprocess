@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses | Creatnprocess Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .courses-header {
+            text-align: center;
+            padding: 60px 0 20px;
+        }
+        .courses-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 10px;
+        }
+        .courses-header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .course-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 40px 0 30px;
+        }
+        .course-filters button {
+            padding: 10px 24px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--muted);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .course-filters button:hover,
+        .course-filters button.active {
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .course-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .course-card .course-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .course-badge.beginner {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--b);
+        }
+        .course-badge.intermediate {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--a);
+        }
+        .course-badge.advanced {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .course-card .course-thumb {
+            height: 200px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--a), var(--b));
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card .course-thumb::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+        }
+        .course-card .course-thumb .play-icon {
+            position: relative;
+            z-index: 1;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            display: grid;
+            place-items: center;
+            font-size: 1.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .course-card h3 {
+            font-size: 1.25rem;
+            margin: 0 0 8px;
+            line-height: 1.3;
+        }
+        .course-card .course-meta {
+            display: flex;
+            gap: 16px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin: 10px 0 14px;
+        }
+        .course-card .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .course-card p {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin: 0 0 18px;
+        }
+        .course-card .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .course-card .course-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .course-card .course-price .old {
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            color: var(--muted);
+            -webkit-text-fill-color: var(--muted);
+            margin-left: 8px;
+            font-weight: 400;
+        }
+        .course-card .btn-small {
+            padding: 10px 24px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .course-card .btn-small:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .course-card .featured-tag {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(90deg, #f59e0b, #f97316);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-card .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+        .course-card .progress-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            transition: width 0.6s ease;
+        }
+
+        .course-card .students-enrolled {
+            color: var(--muted);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Featured Course Section */
+        .featured-course {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 50px;
+            margin: 40px 0 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-course::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .featured-course .featured-thumb {
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #7c3aed, #06b6d4);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-course .featured-thumb::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+        }
+        .featured-course .featured-thumb .play-icon {
+            position: relative;
+            z-index: 1;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            display: grid;
+            place-items: center;
+            font-size: 2.4rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .featured-course .featured-info .badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 999px;
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--a);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .featured-course .featured-info h2 {
+            font-size: 2rem;
+            margin: 0 0 12px;
+        }
+        .featured-course .featured-info p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+        .featured-course .featured-info .featured-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .featured-course .featured-info .featured-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 900px) {
+            .featured-course {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+            .featured-course .featured-thumb {
+                height: 220px;
+            }
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .course-filters button {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            .course-card .course-footer {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+            .course-card .btn-small {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-glow"></div>
+
+    <nav id="nav">
+        <div class="brand">Creatnprocess</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#showcase">Portfolio</a>
+            <a href="founder.html">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="courses-header reveal">
+            <h1>🎓 Academy Courses</h1>
+            <p>Master professional graphic design with our comprehensive, project-based courses. Learn from industry experts and build real-world skills.</p>
+        </div>
+
+        <!-- Course Filters -->
+        <div class="course-filters reveal">
+            <button class="active" data-filter="all">All Courses</button>
+            <button data-filter="beginner">Beginner</button>
+            <button data-filter="intermediate">Intermediate</button>
+            <button data-filter="advanced">Advanced</button>
+            <button data-filter="photoshop">Photoshop</button>
+            <button data-filter="illustrator">Illustrator</button>
+            <button data-filter="branding">Branding</button>
+        </div>
+
+        <!-- Featured Course -->
+        <div class="featured-course reveal">
+            <div class="featured-thumb">
+                <div class="play-icon">▶</div>
+            </div>
+            <div class="featured-info">
+                <div class="badge">⭐ Featured Course</div>
+                <h2>Complete Graphic Design Masterclass</h2>
+                <p>Learn everything from design principles to advanced Photoshop and Illustrator techniques. Build a professional portfolio and start your creative career.</p>
+                <div class="featured-meta">
+                    <span>📚 42 Lessons</span>
+                    <span>⏱️ 18.5 hours</span>
+                    <span>👥 4,200+ students</span>
+                    <span>🏷️ All Levels</span>
+                </div>
+                <a href="#" class="btn primary" style="display:inline-block;">Enroll Now →</a>
+            </div>
+        </div>
+
+        <!-- Courses Grid -->
+        <div class="courses-grid reveal" id="coursesGrid">
+
+            <!-- Course 1 -->
+            <div class="course-card" data-level="beginner" data-category="photoshop">
+                <span class="course-badge beginner">Beginner</span>
+                <div class="course-thumb">
+                    <div class="play-icon">▶</div>
+                </div>
+                <h3>Photoshop for Beginners</h3>
+                <div class="course-meta">
+                    <span>📚 18 Lessons</span>
+                    <span>⏱️ 8 hours</span>
+                </div>
+                <p>Start your Photoshop journey from scratch. Learn the essential tools, techniques, and workflows used by professionals.</p>
+                <div class="students-enrolled">👥 2,800+ students enrolled</div>
+                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+                <div class="course-footer">
+                    <div class="course-price">$49 <span class="old">$79</span></div>
+                    <a href="#" class="btn-small">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="course-card" data-level="intermediate" data-category="illustrator">
+                <span class="course-badge intermediate">Intermediate</span>
+                <div class="course-thumb">
+                    <div class="play-icon">▶</div>
+                </div>
+                <h3>Vector Art & Illustration Mastery</h3>
+                <div class="course-meta">
+                    <span>📚 24 Lessons</span>
+                    <span>⏱️ 12 hours</span>
+                </div>
+                <p>Master Adobe Illustrator and create professional vector art, logos, and illustrations with advanced techniques.</p>
+                <div class="students-enrolled">👥 1,900+ students enrolled</div>
+                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+                <div class="course-footer">
+                    <div class="course-price">$79 <span class="old">$99</span></div>
+                    <a href="#" class="btn-small">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="course-card" data-level="advanced" data-category="branding">
+                <span class="featured-tag">Best Seller</span>
+                <span class="course-badge advanced">Advanced</span>
+                <div class="course-thumb">
+                    <div class="play-icon">▶</div>
+                </div>
+                <h3>Brand Identity Design Pro</h3>
+                <div class="course-meta">
+                    <span>📚 32 Lessons</span>
+                    <span>⏱️ 16 hours</span>
+                </div>
+                <p>Learn to create complete brand identities from research to final presentation. Build professional client-ready branding packages.</p>
+                <div class="students-enrolled">👥 1,500+ students enrolled</div>
+                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+                <div class="course-footer">
+                    <div class="course-price">$99</div>
+                    <a href="#" class="btn-small">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="course-card" data-level="intermediate" data-category="photoshop">
+                <span class="course-badge intermediate">Intermediate</span>
+                <div class="course-thumb">
+                    <div class="play-icon">▶</div>
+                </div>
+                <h3>Photo Manipulation & Retouching</h3>
+                <div class="course-meta">
+                    <span>📚 20 Lessons</span>
+                    <span>⏱️ 10 hours</span>
+                </div>
+                <p>Take your Photoshop skills to the next level with advanced photo manipulation, retouching, and compositing techniques.</p>
+                <div class="students-enrolled">👥 1,200+ students enrolled</div>
+                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+                <div class="course-footer">
+                    <div class="course-price">$69 <span class="old">$89</span></div>
+                    <a href="#" class="btn-small">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="course-card" data-level="beginner" data-category="branding">
+                <span class="course-badge beginner">Beginner</span>
+                <div class="course-thumb">
+                    <div class="play-icon">▶</div>
+                </div>
+                <h3>Graphic Design Fundamentals</h3>
+                <div class="course-meta">
+                    <span>📚 14 Lessons</span>
+                    <span>⏱️ 6 hours</span>
+                </div>
+                <p>Learn the core principles of graphic design: color theory, typography, layout, and composition. Perfect for beginners.</p>
+                <div class="students-enrolled">👥 3,400+ students enrolled</div>
+                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+                <div class="course-footer">
+                    <div class="course-price">$39 <span class="old">$59</span></div>
+                    <a href="#" class="btn-small">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="course-card" data-level="advanced" data-category="illustrator">
+                <span class="featured-tag">New</span>
+                <span class="course-badge advanced">Advanced</span>
+                <div class="course-thumb">
+                    <div class="play-icon">▶</div>
+                </div>
+                <h3>Advanced Logo Design Studio</h3>
+                <div class="course-meta">
+                    <span>📚 28 Lessons</span>
+                    <span>⏱️ 14 hours</span>
+                </div>
+                <p>Master the art of logo design from concept to final delivery. Learn professional workflows and client presentation techniques.</p>
+                <div class="students-enrolled">👥 980+ students enrolled</div>
+                <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+                <div class="course-footer">
+                    <div class="course-price">$89</div>
+                    <a href="#" class="btn-small">Enroll Now</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Call to Action -->
+        <div style="text-align:center;margin-top:60px;padding:50px;background:rgba(255,255,255,0.02);border-radius:24px;border:1px solid rgba(255,255,255,0.06);">
+            <h2 style="margin-bottom:12px;">Ready to Level Up Your Design Skills?</h2>
+            <p style="color:var(--muted);max-width:600px;margin:0 auto 24px;">Join thousands of students who have transformed their creative careers through our practical, project-based courses.</p>
+            <a href="#" class="btn primary">Browse All Courses</a>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 Creatnprocess. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Course Filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.course-filters button');
+            const courseCards = document.querySelectorAll('.course-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+
+                    courseCards.forEach(card => {
+                        const level = card.dataset.level || '';
+                        const category = card.dataset.category || '';
+
+                        if (filter === 'all') {
+                            card.style.display = 'block';
+                        } else if (level === filter || category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Animate progress bars
+            courseCards.forEach(card => {
+                const fill = card.querySelector('.progress-bar .fill');
+                if (fill) {
+                    setTimeout(() => {
+                        // Random progress for demo
+                        const progress = Math.floor(Math.random() * 60) + 20;
+                        fill.style.width = progress + '%';
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
