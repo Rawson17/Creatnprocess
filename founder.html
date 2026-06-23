@@ -1,14 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Founder | Creatnprocess</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .founder-section {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: start;
+            padding: 60px 0;
+        }
+        .founder-avatar {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--a), var(--b));
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 auto;
+        }
+        .founder-info h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 8px;
+        }
+        .founder-info .title {
+            color: var(--a);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .founder-info p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .founder-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .founder-stats .stat-item {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+        }
+        .founder-stats .stat-item h3 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--a), var(--b));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+        .founder-stats .stat-item span {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .founder-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .founder-badges span {
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        @media (max-width: 900px) {
+            .founder-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .founder-avatar {
+                max-width: 280px;
+            }
+            .founder-stats {
+                grid-template-columns: 1fr;
+            }
+            .founder-badges {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
 
-<!doctype html><html><head><title>Founder - Creatnprocess</title>
-<style>body{font-family:Arial;background:#0f172a;color:#fff;padding:40px}
-.card{max-width:1000px;margin:auto;background:#111827;padding:40px;border-radius:20px}
-.photo{width:180px;height:180px;border-radius:50%;background:#374151;margin:auto}</style></head>
-<body><div class='card'><div class='photo'></div>
-<h1>Your Legal Name</h1>
-<h3>Founder of Creatnprocess</h3>
-<p>Your Legal Name is the founder of Creatnprocess, a graphic design education platform helping thousands of students learn professional design skills through practical tutorials and creative resources.</p>
-<h2>Mission</h2>
-<p>I believe professional graphic design should be practical, accessible and industry-focused. Through Creatnprocess, I help designers build real-world creative skills.</p>
-<h2>Achievements</h2>
-<ul><li>422K+ Subscribers</li><li>23.8M+ Views</li><li>386+ Tutorials Published</li></ul>
-</div></body></html>
+    <div class="cursor-glow"></div>
+
+    <nav id="nav">
+        <div class="brand">Creatnprocess</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#showcase">Portfolio</a>
+            <a href="index.html#academy">Academy</a>
+            <a href="founder.html">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="founder-section reveal">
+            <div class="founder-avatar">Your Photo</div>
+            <div class="founder-info">
+                <h1>Your Legal Name</h1>
+                <div class="title">Founder & Creative Director</div>
+                <p>
+                    Your Legal Name is the founder of Creatnprocess, a graphic design education platform dedicated to helping designers build real-world skills. With over 10 years of experience in the creative industry, they have taught thousands of students worldwide through practical tutorials, courses, and creative resources.
+                </p>
+                <p>
+                    Their mission is to make professional graphic design education accessible, practical, and industry-focused — bridging the gap between theory and real client work.
+                </p>
+                <div class="founder-badges">
+                    <span>✓ 422K+ Subscribers</span>
+                    <span>✓ 10+ Years Experience</span>
+                    <span>✓ International Speaker</span>
+                    <span>✓ Design Educator</span>
+                </div>
+                <div class="founder-stats">
+                    <div class="stat-item">
+                        <h3>422K+</h3>
+                        <span>Subscribers</span>
+                    </div>
+                    <div class="stat-item">
+                        <h3>23.8M+</h3>
+                        <span>Views</span>
+                    </div>
+                    <div class="stat-item">
+                        <h3>386+</h3>
+                        <span>Tutorials</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Creatnprocess. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

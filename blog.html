@@ -1,10 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Creatnprocess</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .blog-card {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(139, 92, 246, 0.35);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .blog-card .date {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        .blog-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+        }
+        .blog-card p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .blog-card .read-more {
+            color: var(--a);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 12px;
+        }
+        .blog-card .read-more:hover {
+            color: var(--b);
+        }
+        .blog-header {
+            text-align: center;
+            padding: 60px 0 20px;
+        }
+        .blog-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 10px;
+        }
+        .blog-header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
 
-<!doctype html><html><body style="font-family:Arial;background:#0f172a;color:#fff;padding:40px">
-<h1>Creatnprocess Blog</h1>
-<ul>
-<li>Photoshop Tips</li>
-<li>Graphic Design Trends</li>
-<li>Logo Design Tutorials</li>
-<li>Design Resources</li>
-</ul>
-</body></html>
+    <div class="cursor-glow"></div>
+
+    <nav id="nav">
+        <div class="brand">Creatnprocess</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="index.html#showcase">Portfolio</a>
+            <a href="index.html#academy">Academy</a>
+            <a href="founder.html">About</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="blog-header reveal">
+            <h1>Design Blog</h1>
+            <p>Insights, tutorials, and creative inspiration from the Creatnprocess team.</p>
+        </div>
+
+        <div class="blog-grid reveal">
+            <article class="blog-card">
+                <div class="date">June 20, 2026</div>
+                <h3>5 Photoshop Tips Every Designer Should Know</h3>
+                <p>Learn the essential Photoshop techniques that will speed up your workflow and improve your designs instantly.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+
+            <article class="blog-card">
+                <div class="date">June 15, 2026</div>
+                <h3>Color Theory for Branding: A Complete Guide</h3>
+                <p>Understanding color psychology and how to choose the perfect palette for your brand identity projects.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+
+            <article class="blog-card">
+                <div class="date">June 10, 2026</div>
+                <h3>How to Build a Professional Design Portfolio</h3>
+                <p>Step-by-step guide to creating a portfolio that attracts clients and showcases your best work effectively.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+
+            <article class="blog-card">
+                <div class="date">June 5, 2026</div>
+                <h3>Typography Trends for 2026</h3>
+                <p>Discover the latest typography trends and how to incorporate them into your design projects this year.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+
+            <article class="blog-card">
+                <div class="date">May 28, 2026</div>
+                <h3>Mastering Adobe Illustrator: 10 Pro Tips</h3>
+                <p>Advanced Illustrator techniques that will take your vector art and logo designs to the next level.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+
+            <article class="blog-card">
+                <div class="date">May 20, 2026</div>
+                <h3>Social Media Design Best Practices</h3>
+                <p>Create scroll-stopping social media content with these proven design strategies and templates.</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Creatnprocess. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
