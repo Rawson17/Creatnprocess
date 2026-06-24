@@ -82,6 +82,9 @@ nav {
   font-size: 1.3rem;
   letter-spacing: -0.5px;
   color: var(--text);
+  text-decoration: none;        /* ← Add this to remove underline */
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 .nav-links a {
   color: var(--muted);
