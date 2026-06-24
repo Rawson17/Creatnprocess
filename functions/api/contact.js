@@ -1,4 +1,4 @@
-// functions/api/contact.js
+// functions/api/contact.js - DEBUG VERSION
 export async function onRequest(context) {
   if (context.request.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 });
@@ -10,6 +10,7 @@ export async function onRequest(context) {
     const email = formData.get('email');
     const message = formData.get('message');
 
+    // Validate
     if (!name || !email || !message) {
       return new Response(JSON.stringify({
         success: false,
@@ -19,18 +20,22 @@ export async function onRequest(context) {
       });
     }
 
+    // Get Resend API key
     const RESEND_API_KEY = context.env.RESEND_API_KEY;
+    
+    // Log to see if key exists
+    console.log('RESEND_API_KEY exists:', !!RESEND_API_KEY);
 
     if (!RESEND_API_KEY) {
       return new Response(JSON.stringify({
         success: false,
-        message: 'Server configuration error.'
+        message: 'API key not configured. Please contact support.'
       }), {
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
-    // ✅ FIX: Send to your Resend verified email
+    // SIMPLE TEST - No fancy HTML
     const emailResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -39,27 +44,22 @@ export async function onRequest(context) {
       },
       body: JSON.stringify({
         from: 'Creatnprocess <onboarding@resend.dev>',
-        to: ['Rawson17@gmail.com'], // ← YOUR RESEND EMAIL
-        reply_to: email, // ← The person who filled the form
-        subject: `📩 New Contact Form Submission from ${name}`,
-        html: `
-          <h1>📩 New Contact Form Submission</h1>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong> ${message}</p>
-          <hr>
-          <p>Reply to: ${email}</p>
-        `,
+        to: ['rawson17@gmail.com'], // ← REPLACE with your actual email
+        subject: 'TEST: Contact Form Submission',
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       }),
     });
 
     const result = await emailResponse.json();
 
+    // Log the result
+    console.log('Resend response status:', emailResponse.status);
+    console.log('Resend response body:', result);
+
     if (!emailResponse.ok) {
-      console.error('Resend error:', result);
       return new Response(JSON.stringify({
         success: false,
-        message: 'Failed to send email. Please try again.'
+        message: `Email error: ${result.message || 'Unknown error'}`
       }), {
         headers: { 'Content-Type': 'application/json' }
       });
@@ -67,16 +67,16 @@ export async function onRequest(context) {
 
     return new Response(JSON.stringify({
       success: true,
-      message: '✅ Thank you! Your message has been sent. We\'ll get back to you soon.'
+      message: '✅ Message sent! Check your email.'
     }), {
       headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error('Error:', error);
     return new Response(JSON.stringify({
       success: false,
-      message: 'Something went wrong. Please try again.'
+      message: 'Error: ' + error.message
     }), {
       headers: { 'Content-Type': 'application/json' }
     });
