@@ -642,15 +642,18 @@
             </div>
         </div>
 
-        <!-- ===== NEWSLETTER SIGNUP ===== -->
-        <div class="newsletter-section reveal">
-            <h2>📧 Join Our Newsletter</h2>
-            <p>Get weekly design tips, resources, and community updates delivered straight to your inbox.</p>
-            <form class="newsletter-form" onsubmit="alert('✅ Thank you for subscribing! Check your inbox for design tips.'); return false;">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit" class="btn">Subscribe Now</button>
-            </form>
-        </div>
+    <!-- ===== NEWSLETTER SECTION ON COMMUNITY PAGE ===== -->
+<section class="section reveal" style="text-align:center;">
+  <h2>Join Our Community Newsletter</h2>
+  <p style="color: var(--muted); margin-bottom: 20px;">Get tutorials, resources and design tips delivered to your inbox.</p>
+  
+  <form id="communitySubscribeForm" style="margin-top:20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
+    <input type="email" name="email" id="communitySubscribeEmail" placeholder="Enter your email" required style="padding:12px 18px; width:300px; max-width:80%; border-radius:12px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:white; font-size:1rem; font-family: inherit; outline: none; transition: border-color 0.3s;">
+    <button class="btn primary" type="submit" style="padding:12px 28px; border: none; cursor: pointer;">Subscribe</button>
+  </form>
+  
+  <div id="communitySubscribeMessage" style="margin-top: 16px; font-weight: 500; display: none;"></div>
+</section>
 
         <!-- ===== BACK LINK ===== -->
         <div style="text-align:center;">
@@ -698,5 +701,75 @@
             console.log('📱 Social links updated with official logos');
         });
     </script>
+    <script>
+// ============================================
+// COMMUNITY PAGE - SUBSCRIBE FORM
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const subscribeForm = document.getElementById('communitySubscribeForm');
+    const subscribeEmail = document.getElementById('communitySubscribeEmail');
+    const subscribeMessage = document.getElementById('communitySubscribeMessage');
+    
+    if (subscribeForm) {
+        subscribeForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = subscribeEmail.value.trim();
+            const messageDiv = subscribeMessage;
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Subscribing...';
+            submitBtn.disabled = true;
+            
+            messageDiv.style.display = 'none';
+            messageDiv.className = '';
+            
+            try {
+                const formData = new FormData();
+                formData.append('email', email);
+                
+                // 👇 THIS IS THE KEY - SAME ENDPOINT AS MAIN PAGE
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                messageDiv.style.display = 'block';
+                messageDiv.textContent = data.message;
+                
+                if (data.success) {
+                    messageDiv.style.color = '#8b5cf6';
+                    subscribeEmail.value = '';
+                    subscribeEmail.style.borderColor = '#8b5cf6';
+                } else {
+                    messageDiv.style.color = '#ef4444';
+                    subscribeEmail.style.borderColor = '#ef4444';
+                }
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                if (data.success) {
+                    setTimeout(() => {
+                        messageDiv.style.display = 'none';
+                        subscribeEmail.style.borderColor = 'rgba(255,255,255,0.08)';
+                    }, 5000);
+                }
+                
+            } catch (error) {
+                messageDiv.style.display = 'block';
+                messageDiv.style.color = '#ef4444';
+                messageDiv.textContent = 'Network error. Please try again.';
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>
