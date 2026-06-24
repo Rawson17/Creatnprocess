@@ -106,16 +106,18 @@
             border-color: rgba(139, 92, 246, 0.4);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
         }
+
         .showcase-grid .project .image {
             height: 240px;
             border-radius: 0;
             display: grid;
             place-items: center;
-            font-weight: 600;
-            font-size: 1.1rem;
             position: relative;
             overflow: hidden;
             margin-bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         .showcase-grid .project .image::after {
             content: "";
@@ -126,14 +128,6 @@
         }
         .showcase-grid .project:hover .image::after {
             background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.8));
-        }
-        .showcase-grid .project .image > span {
-            position: relative;
-            z-index: 1;
-            transition: transform 0.4s ease;
-        }
-        .showcase-grid .project:hover .image > span {
-            transform: scale(1.05);
         }
 
         /* Project Overlay */
@@ -377,8 +371,7 @@
             <!-- Project 1 - Branding -->
             <div class="project" data-category="branding">
                 <span class="project-badge featured">⭐ Featured</span>
-                <div class="image" style="background: linear-gradient(135deg, #8b5cf6, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">🏷️</span>
+                <div class="image" style="background: linear-gradient(135deg, #7c3aed, #4f46e5); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%237c3aed%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EBrand Identity%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EComplete brand system%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(1)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Brand Identity Project</h4>
@@ -399,8 +392,7 @@
             <!-- Project 2 - Posters -->
             <div class="project" data-category="posters">
                 <span class="project-badge new">🆕 New</span>
-                <div class="image" style="background: linear-gradient(135deg, #7c3aed, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">🎬</span>
+                <div class="image" style="background: linear-gradient(135deg, #e11d48, #be123c); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23e11d48%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3ECinematic Poster%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EMovie poster design%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(2)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Poster Project</h4>
@@ -420,8 +412,7 @@
 
             <!-- Project 3 - Thumbnails -->
             <div class="project" data-category="thumbnails">
-                <div class="image" style="background: linear-gradient(135deg, #6d28d9, #0891b2);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">▶️</span>
+                <div class="image" style="background: linear-gradient(135deg, #2563eb, #1e40af); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%232563eb%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EThumbnail Design%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EYouTube thumbnail collection%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(3)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Thumbnail Collection</h4>
@@ -440,8 +431,7 @@
 
             <!-- Project 4 - Posters -->
             <div class="project" data-category="posters">
-                <div class="image" style="background: linear-gradient(135deg, #8b5cf6, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">📸</span>
+                <div class="image" style="background: linear-gradient(135deg, #059669, #047857); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23059669%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EPhoto Manipulation%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EAdvanced compositing%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(4)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Photo Manipulation</h4>
@@ -460,8 +450,7 @@
 
             <!-- Project 5 - Branding -->
             <div class="project" data-category="branding">
-                <div class="image" style="background: linear-gradient(135deg, #7c3aed, #0891b2);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">🖌️</span>
+                <div class="image" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%237c3aed%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3ELogo Design%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EMinimalist brand marks%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(5)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Logo Design</h4>
@@ -480,8 +469,7 @@
 
             <!-- Project 6 - UI/UX -->
             <div class="project" data-category="uiux">
-                <div class="image" style="background: linear-gradient(135deg, #6d28d9, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">💻</span>
+                <div class="image" style="background: linear-gradient(135deg, #0d9488, #0f766e); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%230d9488%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EUI/UX Design%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EApp interface design%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(6)">View Project →</button>
                     <div class="project-overlay">
                         <h4>UI/UX Design</h4>
@@ -501,8 +489,7 @@
             <!-- Project 7 - Video -->
             <div class="project" data-category="video">
                 <span class="project-badge featured">⭐ Featured</span>
-                <div class="image" style="background: linear-gradient(135deg, #8b5cf6, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">🎥</span>
+                <div class="image" style="background: linear-gradient(135deg, #dc2626, #b91c1c); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23dc2626%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EVideo Production%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EMotion graphics %26 editing%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(7)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Video Production</h4>
@@ -522,8 +509,7 @@
 
             <!-- Project 8 - Thumbnails -->
             <div class="project" data-category="thumbnails">
-                <div class="image" style="background: linear-gradient(135deg, #7c3aed, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">📱</span>
+                <div class="image" style="background: linear-gradient(135deg, #f59e0b, #d97706); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23f59e0b%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3ESocial Media Templates%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EInstagram %26 Facebook posts%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(8)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Social Media Templates</h4>
@@ -542,8 +528,7 @@
 
             <!-- Project 9 - Branding -->
             <div class="project" data-category="branding">
-                <div class="image" style="background: linear-gradient(135deg, #6d28d9, #0891b2);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">📦</span>
+                <div class="image" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%238b5cf6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EPackaging Design%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EProduct packaging %26 labeling%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(9)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Packaging Design</h4>
@@ -562,8 +547,7 @@
 
             <!-- Project 10 - Posters -->
             <div class="project" data-category="posters">
-                <div class="image" style="background: linear-gradient(135deg, #8b5cf6, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">🎨</span>
+                <div class="image" style="background: linear-gradient(135deg, #ec4899, #db2777); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23ec4899%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EEvent Poster%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EMusic festival design%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(10)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Event Poster</h4>
@@ -582,8 +566,7 @@
 
             <!-- Project 11 - Video -->
             <div class="project" data-category="video">
-                <div class="image" style="background: linear-gradient(135deg, #7c3aed, #0891b2);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">🎬</span>
+                <div class="image" style="background: linear-gradient(135deg, #06b6d4, #0891b2); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%2306b6d4%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EMotion Graphics%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EAnimated brand content%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(11)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Motion Graphics</h4>
@@ -602,8 +585,7 @@
 
             <!-- Project 12 - UI/UX -->
             <div class="project" data-category="uiux">
-                <div class="image" style="background: linear-gradient(135deg, #6d28d9, #06b6d4);">
-                    <span style="position:relative;z-index:1;font-size:2rem;">📋</span>
+                <div class="image" style="background: linear-gradient(135deg, #f472b6, #ec4899); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23f472b6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EWireframing %26 Prototyping%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EApp wireframes %26 prototypes%3C/text%3E%3C/svg%3E');">
                     <button class="view-btn" onclick="openProject(12)">View Project →</button>
                     <div class="project-overlay">
                         <h4>Wireframing & Prototyping</h4>
@@ -699,6 +681,7 @@
 
         console.log('🎨 Design Showcase loaded!');
         console.log(`📁 ${projects.length} projects available`);
+        console.log('🖼️ Each project has a custom design thumbnail');
     </script>
 </body>
 </html>
