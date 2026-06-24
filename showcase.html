@@ -500,4 +500,121 @@
 
             <!-- Project 11 - Video -->
             <div class="project" data-category="video">
-                <div class="image" style="background: linear-gradient(135deg, #06b6d4, #0891b2); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%2306b6d4%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EMotion Graphics%3C/text%3E%3Ctext x=%2250%25
+                <div class="image" style="background: linear-gradient(135deg, #06b6d4, #0891b2); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%2306b6d4%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EMotion Graphics%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EAnimated brand content%3C/text%3E%3C/svg%3E');">
+                    <button class="view-btn" onclick="openProject(11)">View Project →</button>
+                    <div class="project-overlay">
+                        <h4>Motion Graphics</h4>
+                        <p>Animated motion graphics for brands</p>
+                        <span class="project-tag">Video</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Motion Graphics</h3>
+                    <div class="project-meta">
+                        <span>📁 Video</span>
+                        <span>📅 2024</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 12 - UI/UX -->
+            <div class="project" data-category="uiux">
+                <div class="image" style="background: linear-gradient(135deg, #f472b6, #ec4899); background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23f472b6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2222%22 font-weight=%22700%22 fill=%22rgba(255,255,255,0.9)%22%3EWireframing %26 Prototyping%3C/text%3E%3Ctext x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Inter%2C sans-serif%22 font-size=%2212%22 font-weight=%22400%22 fill=%22rgba(255,255,255,0.5)%22%3EApp wireframes %26 prototypes%3C/text%3E%3C/svg%3E');">
+                    <button class="view-btn" onclick="openProject(12)">View Project →</button>
+                    <div class="project-overlay">
+                        <h4>Wireframing & Prototyping</h4>
+                        <p>Complete app wireframes and interactive prototypes</p>
+                        <span class="project-tag">UI/UX</span>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <h3>Wireframing & Prototyping</h3>
+                    <div class="project-meta">
+                        <span>📁 UI/UX</span>
+                        <span>📅 2024</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Back Link -->
+        <div style="text-align:center;">
+            <a href="index.html#showcase" class="back-link"><span>←</span> Back to Home</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Creatnprocess. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ============================================================
+        // PROJECT DATA
+        // ============================================================
+        const projects = [
+            { id: 1, title: "Brand Identity Project", category: "branding", description: "Complete brand identity for a modern startup" },
+            { id: 2, title: "Poster Project", category: "posters", description: "Cinematic movie poster design" },
+            { id: 3, title: "Thumbnail Collection", category: "thumbnails", description: "Engaging YouTube thumbnail designs" },
+            { id: 4, title: "Photo Manipulation", category: "posters", description: "Advanced photo compositing and retouching" },
+            { id: 5, title: "Logo Design", category: "branding", description: "Minimalist logo designs for various brands" },
+            { id: 6, title: "UI/UX Design", category: "uiux", description: "Modern app interface design with user flow" },
+            { id: 7, title: "Video Production", category: "video", description: "Professional video editing and motion graphics" },
+            { id: 8, title: "Social Media Templates", category: "thumbnails", description: "Engaging social media post designs" },
+            { id: 9, title: "Packaging Design", category: "branding", description: "Creative product packaging and labeling" },
+            { id: 10, title: "Event Poster", category: "posters", description: "Music festival and event posters" },
+            { id: 11, title: "Motion Graphics", category: "video", description: "Animated motion graphics for brands" },
+            { id: 12, title: "Wireframing & Prototyping", category: "uiux", description: "Complete app wireframes and interactive prototypes" }
+        ];
+
+        // ============================================================
+        // OPEN PROJECT
+        // ============================================================
+        function openProject(id) {
+            const project = projects.find(p => p.id === id);
+            if (project) {
+                alert(`📁 ${project.title}\n\n📂 Category: ${project.category}\n📝 ${project.description}\n\n🔗 This would open the full project detail page.`);
+            }
+        }
+
+        // ============================================================
+        // FILTER SYSTEM
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.showcase-filters button');
+            const projectCards = document.querySelectorAll('.project');
+            const noResults = document.getElementById('noResults');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+                    let visible = 0;
+
+                    projectCards.forEach(card => {
+                        const category = card.dataset.category || '';
+                        if (filter === 'all' || category === filter) {
+                            card.style.display = 'block';
+                            visible++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    if (visible === 0) {
+                        noResults.classList.add('show');
+                    } else {
+                        noResults.classList.remove('show');
+                    }
+                });
+            });
+        });
+
+        console.log('🎨 Design Showcase loaded!');
+        console.log(`📁 ${projects.length} projects available`);
+    </script>
+</body>
+</html>
