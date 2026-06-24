@@ -244,21 +244,22 @@
 </section>
 
   <!-- ===== CONTACT ===== -->
-  <section id="contact" class="section reveal contact-section">
-    <div class="contact-card">
-      <div class="contact-content">
-        <h2>Let's Work Together</h2>
-        <p>For sponsorships, partnerships and collaborations.</p>
-        <p class="contact-email">hello@creatnprocess.com</p>
-      </div>
-      <form class="contact-form" onsubmit="alert('Thank you for your inquiry! We will get back to you soon.'); return false;">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <textarea placeholder="Tell me about your project" required></textarea>
-        <button type="submit">Send Inquiry</button>
-      </form>
+<section id="contact" class="section reveal contact-section">
+  <div class="contact-card">
+    <div class="contact-content">
+      <h2>Let's Work Together</h2>
+      <p>For sponsorships, partnerships and collaborations.</p>
+      <p class="contact-email">hello@creatnprocess.com</p>
     </div>
-  </section>
+    <form id="contactForm" class="contact-form">
+      <input type="text" id="contactName" placeholder="Your Name" required>
+      <input type="email" id="contactEmail" placeholder="Email Address" required>
+      <textarea id="contactMessage" placeholder="Tell me about your project" required></textarea>
+      <button type="submit">Send Inquiry</button>
+    </form>
+    <div id="contactMessageDiv" style="margin-top: 16px; font-weight: 500; display: none;"></div>
+  </div>
+</section>
 
   <!-- ===== FOOTER ===== -->
   <footer>
@@ -373,5 +374,75 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 </script>
-</body>
+<script>
+// ============================================
+// CONTACT FORM - Cloudflare Pages
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const contactForm = document.getElementById('contactForm');
+    const contactName = document.getElementById('contactName');
+    const contactEmail = document.getElementById('contactEmail');
+    const contactMessage = document.getElementById('contactMessage');
+    const contactMessageDiv = document.getElementById('contactMessageDiv');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = contactName.value.trim();
+            const email = contactEmail.value.trim();
+            const message = contactMessage.value.trim();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            contactMessageDiv.style.display = 'none';
+            contactMessageDiv.className = '';
+            
+            try {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('message', message);
+                
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                contactMessageDiv.style.display = 'block';
+                contactMessageDiv.textContent = data.message;
+                
+                if (data.success) {
+                    contactMessageDiv.style.color = '#8b5cf6';
+                    contactForm.reset();
+                } else {
+                    contactMessageDiv.style.color = '#ef4444';
+                }
+                
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                if (data.success) {
+                    setTimeout(() => {
+                        contactMessageDiv.style.display = 'none';
+                    }, 6000);
+                }
+                
+            } catch (error) {
+                contactMessageDiv.style.display = 'block';
+                contactMessageDiv.style.color = '#ef4444';
+                contactMessageDiv.textContent = 'Network error. Please try again.';
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+</script></body>
 </html>
