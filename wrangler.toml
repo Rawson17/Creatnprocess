@@ -1,0 +1,7 @@
+name = "creatnprocess-website"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "creatnprocess-subscribers"
+database_id = "04fcd266-295f-4da9-95c6-ccdf8c850c4c"  # ← Paste your actual database ID
