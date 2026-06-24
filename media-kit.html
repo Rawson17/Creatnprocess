@@ -90,7 +90,7 @@
         border-color: rgba(255, 255, 255, 0.08) !important;
       }
       .btn-download {
-        display: none !important;
+        display: inline-block !important;
       }
       .country-item {
         border-bottom-color: rgba(255, 255, 255, 0.06) !important;
@@ -721,10 +721,10 @@
 
   </div>
 
-  <!-- download button -->
+  <!-- DOWNLOAD BUTTON — links directly to media-kit.pdf -->
   <div style="margin-top: 32px; text-align: center;">
-    <button class="btn-download" onclick="window.print()">⬇ Download as PDF (Print)</button>
-    <p style="font-size: 13px; color: var(--muted); margin-top: 10px; opacity: 0.6;">Use "Save as PDF" in the print dialog</p>
+    <a href="media-kit.pdf" download class="btn-download">⬇ Download as PDF</a>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 10px; opacity: 0.6;">Click to download the complete media kit</p>
   </div>
 
 </body>
