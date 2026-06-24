@@ -39,13 +39,28 @@
 </header>
 
   <!-- ===== STATS ===== -->
-  <section class="stats reveal">
-    <div class="stat"><h3>422K+</h3><span>Subscribers</span></div>
-    <div class="stat"><h3>23.8M+</h3><span>Views</span></div>
-    <div class="stat"><h3>386+</h3><span>Tutorials</span></div>
-    <div class="stat"><h3>10,000+</h3><span>Students Helped</span></div>
-    <div class="stat"><h3>10+</h3><span>Years of Expertise</span></div>
-  </section>
+<section class="stats reveal">
+    <div class="stat">
+        <h3 id="subscriberCount">Loading...</h3>
+        <span>Subscribers</span>
+    </div>
+    <div class="stat">
+        <h3 id="viewCount">Loading...</h3>
+        <span>Views</span>
+    </div>
+    <div class="stat">
+        <h3 id="videoCount">Loading...</h3>
+        <span>Tutorials</span>
+    </div>
+    <div class="stat">
+        <h3>10,000+</h3>
+        <span>Students Helped</span>
+    </div>
+    <div class="stat">
+        <h3>10+</h3>
+        <span>Years of Expertise</span>
+    </div>
+</section>
 
   <!-- ===== TUTORIALS ===== -->
 <section id="tutorials" class="section reveal">
@@ -317,6 +332,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.disabled = false;
             }
         });
+    }
+});
+</script>
+<script>
+// ============================================
+// FETCH YOUTUBE STATS FROM CLOUDFLARE FUNCTION
+// ============================================
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const response = await fetch('/api/youtube');
+        const data = await response.json();
+
+        if (data.subscriberCount) {
+            // Format numbers with commas (e.g., 422600 → 422,600)
+            const formatNumber = (num) => {
+                return Number(num).toLocaleString('en-US');
+            };
+
+            // Update the stats on your page
+            document.getElementById('subscriberCount').textContent = formatNumber(data.subscriberCount) + '+';
+            document.getElementById('viewCount').textContent = formatNumber(data.viewCount) + '+';
+            document.getElementById('videoCount').textContent = formatNumber(data.videoCount) + '+';
+            
+            console.log('✅ YouTube stats updated successfully!');
+        } else {
+            console.warn('No YouTube stats received:', data);
+        }
+    } catch (error) {
+        console.error('Failed to fetch YouTube stats:', error);
+        // Keep the static fallback values
+        document.getElementById('subscriberCount').textContent = '422K+';
+        document.getElementById('viewCount').textContent = '23.8M+';
+        document.getElementById('videoCount').textContent = '386+';
     }
 });
 </script>
