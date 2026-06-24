@@ -345,26 +345,31 @@ document.addEventListener('DOMContentLoaded', async function() {
         const data = await response.json();
 
         if (data.subscriberCount) {
-            // Format numbers with commas (e.g., 422600 → 422,600)
+            // Format numbers (e.g., 422600 → 422K, 23800000 → 23.8M)
             const formatNumber = (num) => {
-                return Number(num).toLocaleString('en-US');
+                const n = Number(num);
+                if (n >= 1000000) {
+                    return (n / 1000000).toFixed(1) + 'M';
+                } else if (n >= 1000) {
+                    return (n / 1000).toFixed(0) + 'K';
+                } else {
+                    return n.toString();
+                }
             };
 
             // Update the stats on your page
             document.getElementById('subscriberCount').textContent = formatNumber(data.subscriberCount) + '+';
             document.getElementById('viewCount').textContent = formatNumber(data.viewCount) + '+';
-            document.getElementById('videoCount').textContent = formatNumber(data.videoCount) + '+';
+            document.getElementById('videoCount').textContent = formatNumber(data.videoCount);
             
             console.log('✅ YouTube stats updated successfully!');
-        } else {
-            console.warn('No YouTube stats received:', data);
         }
     } catch (error) {
         console.error('Failed to fetch YouTube stats:', error);
-        // Keep the static fallback values
+        // Keep static fallback values
         document.getElementById('subscriberCount').textContent = '422K+';
         document.getElementById('viewCount').textContent = '23.8M+';
-        document.getElementById('videoCount').textContent = '386+';
+        document.getElementById('videoCount').textContent = '382';
     }
 });
 </script>
