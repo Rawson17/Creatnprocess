@@ -257,3 +257,102 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('💡 Design by Creatnprocess Studio');
   console.log('🔢 Number counting animation enabled!');
 })();
+// ============================================
+// NEWSLETTER FORM - Formspree
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('newsletterForm');
+  const emailInput = document.getElementById('newsletterEmail');
+  const statusDiv = document.getElementById('newsletterStatus');
+  
+  if (!form || !emailInput || !statusDiv) return;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = emailInput.value.trim();
+    
+    // Validate
+    if (!email) {
+      statusDiv.innerHTML = `
+        <div style="color: #F87171; font-weight: 500;">
+          ❌ Please enter your email address.
+        </div>
+      `;
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      statusDiv.innerHTML = `
+        <div style="color: #F87171; font-weight: 500;">
+          ❌ Please enter a valid email address.
+        </div>
+      `;
+      return;
+    }
+
+    // Disable button
+    const submitBtn = document.getElementById('newsletterBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Subscribing...';
+    statusDiv.innerHTML = '';
+
+    try {
+      const formData = new FormData(form);
+      
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        statusDiv.innerHTML = `
+          <div style="
+            padding: 16px 20px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            color: #34D399;
+            font-weight: 500;
+            display: inline-block;
+          ">
+            ✅ Thanks for subscribing! You'll receive design tips and resources.
+          </div>
+        `;
+        emailInput.value = '';
+      } else {
+        const data = await response.json();
+        throw new Error(data.error || 'Subscription failed');
+      }
+    } catch (error) {
+      console.error('Newsletter error:', error);
+      statusDiv.innerHTML = `
+        <div style="
+          padding: 16px 20px;
+          background: rgba(239, 68, 68, 0.15);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          border-radius: 12px;
+          color: #F87171;
+          font-weight: 500;
+          display: inline-block;
+        ">
+          ❌ Something went wrong. Please try again.
+        </div>
+      `;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Subscribe';
+    }
+  });
+
+  // Allow Enter key
+  emailInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      form.dispatchEvent(new Event('submit'));
+    }
+  });
+});
