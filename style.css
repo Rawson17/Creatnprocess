@@ -82,7 +82,7 @@ nav {
   font-size: 1.3rem;
   letter-spacing: -0.5px;
   color: var(--text);
-  text-decoration: none;        /* ← Add this to remove underline */
+  text-decoration: none;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -173,19 +173,6 @@ h1 {
 .btn-click {
   transform: scale(0.97);
   opacity: 0.9;
-}
-
-/* ===== VIEW MORE BUTTON ===== */
-.heading-row + .portfolio + div a:hover {
-  background: rgba(255,255,255,0.08) !important;
-  border-color: rgba(139, 92, 246, 0.3) !important;
-  color: var(--text) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.heading-row + .portfolio + div a:hover span {
-  transform: translateX(4px);
 }
 
 /* ===== SECTIONS ===== */
@@ -282,12 +269,6 @@ h2 {
   inset: 0;
   background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.25));
 }
-
-/* ===== WATCH MORE BUTTON ===== */
-#tutorials .heading-row a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
-} 
 
 /* ===== PORTFOLIO / SHOWCASE ===== */
 .heading-row {
@@ -386,65 +367,6 @@ h2 {
   background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.8));
 }
 
-.project .image .project-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 24px;
-  z-index: 2;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.project:hover .image .project-overlay {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.project .image .project-overlay h4 {
-  font-size: 1.1rem;
-  margin: 0 0 4px;
-  color: white;
-  font-weight: 600;
-}
-
-.project .image .project-overlay p {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0 0 8px;
-}
-
-.project .image .project-overlay .project-tag {
-  display: inline-block;
-  padding: 3px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.project .image > span {
-  position: relative;
-  z-index: 1;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.project:hover .image > span {
-  transform: scale(1.2);
-}
-
-/* Project filter animation */
-.project {
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
 .project.hidden {
   display: none;
 }
@@ -484,12 +406,6 @@ h2 {
   .filters button {
     padding: 8px 14px;
     font-size: 0.8rem;
-  }
-  .project .image .project-overlay {
-    padding: 16px;
-  }
-  .project .image .project-overlay h4 {
-    font-size: 0.95rem;
   }
 }
 
@@ -548,15 +464,6 @@ h2 {
   font-weight: 500;
 }
 
-/* ===== ABOUT SECTION LINK ===== */
-.about a[href="founder.html"]:hover {
-  background: linear-gradient(90deg, var(--a), var(--b));
-  color: white !important;
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-}
-
 /* ===== BRANDS ===== */
 .brands {
   display: grid;
@@ -576,14 +483,6 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
   margin-top: 20px;
-}
-.stat-card h2 {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
-}
-.stat-card p {
-  opacity: 0.8;
-  margin: 0;
 }
 
 /* ===== CONTACT ===== */
@@ -715,6 +614,7 @@ footer {
     gap: 16px;
   }
 }
+
 /* ============================================
    CONVERTKIT FORM - EXACTLY YOUR ORIGINAL DESIGN
    ============================================ */
