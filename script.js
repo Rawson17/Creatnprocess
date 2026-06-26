@@ -82,21 +82,7 @@
     });
   });
 
-  // ---- Newsletter Form ----
-  const newsletterForm = document.querySelector('#newsletter form');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = this.querySelector('input[type="email"]').value;
-      if (email) {
-        alert('📧 Thank you for subscribing! You\'ll receive design tips and resources.');
-        this.querySelector('input[type="email"]').value = '';
-      } else {
-        alert('Please enter your email address.');
-      }
-    });
-  }
-
+ 
  // ===== CONTACT FORM - Simple Version =====
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.querySelector('.contact-form');
