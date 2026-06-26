@@ -251,13 +251,18 @@
       <p>For sponsorships, partnerships and collaborations.</p>
       <p class="contact-email">hello@creatnprocess.com</p>
     </div>
-    <form id="contactForm" class="contact-form">
-      <input type="text" id="contactName" placeholder="Your Name" required>
-      <input type="email" id="contactEmail" placeholder="Email Address" required>
-      <textarea id="contactMessage" placeholder="Tell me about your project" required></textarea>
+    
+    <!-- CHANGE THIS PART -->
+    <form class="contact-form" 
+          action="https://formspree.io/f/xzdlrpyv" 
+          method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <textarea name="message" placeholder="Tell me about your project" required></textarea>
       <button type="submit">Send Inquiry</button>
     </form>
-    <div id="contactMessageDiv" style="margin-top: 16px; font-weight: 500; display: none;"></div>
+    <!-- END OF CHANGE -->
+    
   </div>
 </section>
 
