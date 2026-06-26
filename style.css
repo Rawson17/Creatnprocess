@@ -716,8 +716,8 @@ footer {
   }
 }
 
-/* ===== CONVERTKIT FORM - CUSTOM STYLING ===== */
-/* This makes the ConvertKit form match your website design */
+/* ===== CONVERTKIT FORM - CLEAN DESIGN ===== */
+/* Hide all extra ConvertKit elements - keep only the form */
 
 .formkit-form[data-uid="5cf2b519d4"] {
   max-width: 500px !important;
@@ -727,7 +727,50 @@ footer {
   font-family: 'Inter', sans-serif !important;
 }
 
-/* Style the input field */
+/* Hide ConvertKit's heading (we have our own) */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-header,
+.formkit-form[data-uid="5cf2b519d4"] .formkit-heading {
+  display: none !important;
+}
+
+/* Hide ConvertKit's description (we have our own) */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-subheader,
+.formkit-form[data-uid="5cf2b519d4"] .formkit-description {
+  display: none !important;
+}
+
+/* Hide the label (we don't need it) */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-label {
+  display: none !important;
+}
+
+/* Hide the privacy text */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-guarantee {
+  display: none !important;
+}
+
+/* Hide "Built with Kit" footer */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-powered-by {
+  display: none !important;
+}
+
+/* Style the form container - flex row */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-fields {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.formkit-form[data-uid="5cf2b519d4"] .formkit-field {
+  margin: 0 !important;
+  flex: 0 1 auto !important;
+}
+
+/* Style the input field - matches your design */
 .formkit-form[data-uid="5cf2b519d4"] .formkit-input {
   background: rgba(255, 255, 255, 0.03) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -737,7 +780,9 @@ footer {
   font-size: 1rem !important;
   font-family: 'Inter', sans-serif !important;
   width: 300px !important;
+  max-width: 80vw !important;
   transition: border-color 0.3s ease !important;
+  box-sizing: border-box !important;
 }
 
 .formkit-form[data-uid="5cf2b519d4"] .formkit-input:focus {
@@ -745,7 +790,7 @@ footer {
   outline: none !important;
 }
 
-/* Style the submit button */
+/* Style the submit button - matches your design */
 .formkit-form[data-uid="5cf2b519d4"] .formkit-submit {
   background: linear-gradient(90deg, #8B5CF6, #6D28D9) !important;
   border-radius: 12px !important;
@@ -757,6 +802,7 @@ footer {
   cursor: pointer !important;
   color: white !important;
   transition: all 0.3s ease !important;
+  white-space: nowrap !important;
 }
 
 .formkit-form[data-uid="5cf2b519d4"] .formkit-submit:hover {
@@ -764,31 +810,17 @@ footer {
   box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3) !important;
 }
 
-/* Style the form wrapper - makes it flex and center */
-.formkit-form[data-uid="5cf2b519d4"] .formkit-fields {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  justify-content: center !important;
-  gap: 12px !important;
-}
-
-/* Style the field wrapper */
-.formkit-form[data-uid="5cf2b519d4"] .formkit-field {
-  margin: 0 !important;
-  flex: 0 1 auto !important;
-}
-
-/* Hide ConvertKit's default labels (we already have our own heading) */
-.formkit-form[data-uid="5cf2b519d4"] .formkit-label {
-  display: none !important;
-}
-
-/* Style success/error messages */
+/* Style the alert/success messages */
 .formkit-form[data-uid="5cf2b519d4"] .formkit-alert {
   background: transparent !important;
-  padding: 12px 0 !important;
-  color: #34D399 !important;
+  padding: 10px 0 !important;
+  margin: 0 !important;
   font-weight: 500 !important;
+  font-size: 0.95rem !important;
+}
+
+.formkit-form[data-uid="5cf2b519d4"] .formkit-alert-success {
+  color: #34D399 !important;
 }
 
 .formkit-form[data-uid="5cf2b519d4"] .formkit-alert-error {
@@ -799,7 +831,7 @@ footer {
 @media (max-width: 600px) {
   .formkit-form[data-uid="5cf2b519d4"] .formkit-input {
     width: 100% !important;
-    max-width: 300px !important;
+    max-width: 280px !important;
   }
   
   .formkit-form[data-uid="5cf2b519d4"] .formkit-fields {
