@@ -715,3 +715,95 @@ footer {
     gap: 16px;
   }
 }
+
+/* ===== CONVERTKIT FORM - CUSTOM STYLING ===== */
+/* This makes the ConvertKit form match your website design */
+
+.formkit-form[data-uid="5cf2b519d4"] {
+  max-width: 500px !important;
+  margin: 0 auto !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Style the input field */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-input {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  padding: 12px 18px !important;
+  font-size: 1rem !important;
+  font-family: 'Inter', sans-serif !important;
+  width: 300px !important;
+  transition: border-color 0.3s ease !important;
+}
+
+.formkit-form[data-uid="5cf2b519d4"] .formkit-input:focus {
+  border-color: #8B5CF6 !important;
+  outline: none !important;
+}
+
+/* Style the submit button */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-submit {
+  background: linear-gradient(90deg, #8B5CF6, #6D28D9) !important;
+  border-radius: 12px !important;
+  padding: 12px 28px !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  font-family: 'Inter', sans-serif !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.formkit-form[data-uid="5cf2b519d4"] .formkit-submit:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3) !important;
+}
+
+/* Style the form wrapper - makes it flex and center */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-fields {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+/* Style the field wrapper */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-field {
+  margin: 0 !important;
+  flex: 0 1 auto !important;
+}
+
+/* Hide ConvertKit's default labels (we already have our own heading) */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-label {
+  display: none !important;
+}
+
+/* Style success/error messages */
+.formkit-form[data-uid="5cf2b519d4"] .formkit-alert {
+  background: transparent !important;
+  padding: 12px 0 !important;
+  color: #34D399 !important;
+  font-weight: 500 !important;
+}
+
+.formkit-form[data-uid="5cf2b519d4"] .formkit-alert-error {
+  color: #F87171 !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .formkit-form[data-uid="5cf2b519d4"] .formkit-input {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+  
+  .formkit-form[data-uid="5cf2b519d4"] .formkit-fields {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}
