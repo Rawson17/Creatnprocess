@@ -97,23 +97,59 @@
     });
   }
 
-  // ---- Contact Form ----
-  const contactForm = document.querySelector('.contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = this.querySelector('input[placeholder="Your Name"]').value;
-      const email = this.querySelector('input[placeholder="Email Address"]').value;
-      const message = this.querySelector('textarea').value;
+ // ===== CONTACT FORM - Simple Version =====
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('.contact-form');
+  if (!form) return;
 
-      if (name && email && message) {
-        alert('✅ Thank you for your inquiry, ' + name + '! We will get back to you soon.');
-        this.reset();
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        form.innerHTML = `
+          <div style="
+            text-align: center;
+            padding: 30px 20px;
+          ">
+            <div style="
+              font-size: 48px;
+              margin-bottom: 16px;
+            ">✅</div>
+            <h3 style="
+              color: #34D399;
+              margin-bottom: 8px;
+            ">Thank You!</h3>
+            <p style="color: var(--muted);">
+              Your inquiry has been sent. We'll get back to you soon!
+            </p>
+          </div>
+        `;
       } else {
-        alert('⚠️ Please fill in all fields.');
+        throw new Error('Form submission failed');
       }
-    });
-  }
+    } catch (error) {
+      alert('Something went wrong. Please try again or email us directly at hello@creatnprocess.com');
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+});
 
   // ============================================================
   // ---- NUMBER COUNTING ANIMATION ----
