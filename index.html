@@ -228,20 +228,26 @@
     </div>
   </section>
 
-  <!-- ===== NEWSLETTER ===== -->
-<section class="section reveal" style="text-align:center;">
-  <h2>Join 10,000+ Designers</h2>
-  <p style="color: var(--muted); margin-bottom: 20px;">Get tutorials, resources and design tips.</p>
-  
-  <!-- Subscribe Form with backend -->
-  <form id="subscribeForm" action="subscribe.php" method="POST" style="margin-top:20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
-    <input type="email" name="email" id="subscribeEmail" placeholder="Enter your email" required style="padding:12px 18px; width:300px; max-width:80%; border-radius:12px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:white; font-size:1rem; font-family: inherit; outline: none; transition: border-color 0.3s;">
-    <button class="btn primary" type="submit" style="padding:12px 28px; border: none; cursor: pointer;">Subscribe</button>
-  </form>
-  
-  <!-- Message container for feedback -->
-  <div id="subscribeMessage" style="margin-top: 16px; font-weight: 500; display: none;"></div>
-</section>
+    <!-- ===== NEWSLETTER ===== -->
+  <section class="section reveal" style="text-align:center;">
+    <h2>Join 10,000+ Designers</h2>
+    <p style="color: var(--muted); margin-bottom: 20px;">Get tutorials, resources and design tips.</p>
+    
+    <!-- Newsletter Form -->
+    <div id="newsletterContainer" style="margin-top:20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
+      <input 
+        type="email" 
+        id="newsletterEmail"
+        placeholder="Enter your email" 
+        required
+        style="padding:12px 18px; width:300px; max-width:80%; border-radius:12px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:white; font-size:1rem; font-family: inherit; outline: none; transition: border-color 0.3s;">
+      <button class="btn primary" id="newsletterBtn" style="padding:12px 28px; border: none; cursor: pointer;">
+        Subscribe
+      </button>
+    </div>
+    
+    <div id="newsletterStatus" style="margin-top: 16px; min-height: 40px;"></div>
+  </section>
 
   <!-- ===== CONTACT ===== -->
 <section id="contact" class="section reveal contact-section">
