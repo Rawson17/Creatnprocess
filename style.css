@@ -715,3 +715,35 @@ footer {
     gap: 16px;
   }
 }
+/* ============================================
+   TALLY FORM - MATCH YOUR ORIGINAL DESIGN
+   ============================================ */
+
+/* Make Tally iframe transparent and clean */
+#tallyContainer {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+#tallyContainer iframe {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: 180px !important;
+  max-width: 500px !important;
+  border-radius: 0 !important;
+}
+
+/* Tally's internal form styling - match your design */
+.tally-form {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  #tallyContainer iframe {
+    min-height: 200px !important;
+    width: 100% !important;
+  }
+}
