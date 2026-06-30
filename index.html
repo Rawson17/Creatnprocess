@@ -233,11 +233,14 @@
     <h2>Join 10,000+ Designers</h2>
     <p style="color: var(--muted); margin-bottom: 20px;">Get tutorials, resources and design tips.</p>
     
-    <!-- Your Custom Newsletter Form -->
-    <form id="newsletterForm" style="margin-top:20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
+    <form id="newsletterForm" 
+          action="https://formspree.io/f/xlgybbdv" 
+          method="POST"
+          style="margin-top:20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
       <input 
         type="email" 
         id="newsletterEmail"
+        name="email"
         placeholder="Enter your email" 
         required
         style="padding:12px 18px; width:300px; max-width:80%; border-radius:12px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); color:white; font-size:1rem; font-family: inherit; outline: none; transition: border-color 0.3s;">
