@@ -747,41 +747,78 @@ footer {
     width: 100% !important;
   }
 }
-/* ===== VIDEO MODAL STYLING ===== */
+/* ============================================
+   VIDEO MODAL STYLING (FIXED)
+   ============================================ */
+
 #videoModal {
-  animation: fadeIn 0.3s ease-out;
+  animation: videoFadeIn 0.3s ease-out;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 20px !important;
+}
+
+#videoModal > div {
+  position: relative !important;
+  margin: auto !important;
+  max-width: 900px !important;
+  width: 100% !important;
 }
 
 #videoModal iframe {
-  transition: all 0.3s ease;
+  display: block !important;
+  border-radius: 16px !important;
+}
+
+#videoModal button {
+  transition: all 0.3s ease !important;
+  position: absolute !important;
+  top: -12px !important;
+  right: -12px !important;
+  z-index: 99999 !important;
 }
 
 #videoModal button:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
-  transform: scale(1.1);
+  background: rgba(255, 50, 50, 0.9) !important;
+  transform: scale(1.1) !important;
+  border-color: rgba(255, 50, 50, 0.5) !important;
 }
 
-@keyframes fadeIn {
-  from {
+#videoModal button:active {
+  transform: scale(0.9) !important;
+}
+
+@keyframes videoFadeIn {
+  0% {
     opacity: 0;
     transform: scale(0.95);
   }
-  to {
+  100% {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-/* Mobile responsiveness */
+/* Mobile responsive */
 @media (max-width: 600px) {
   #videoModal {
-    padding: 10px;
+    padding: 10px !important;
   }
+  
   #videoModal button {
-    top: 10px !important;
-    right: 14px !important;
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 22px !important;
+    top: -8px !important;
+    right: -8px !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 18px !important;
+  }
+  
+  #videoModal > div {
+    border-radius: 12px !important;
+    overflow: visible !important;
+  }
+  
+  #videoModal iframe {
+    border-radius: 12px !important;
   }
 }
