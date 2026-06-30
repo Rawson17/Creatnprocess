@@ -272,7 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const email = emailInput.value.trim();
     
-    // Validate
     if (!email) {
       statusDiv.innerHTML = `
         <div style="color: #F87171; font-weight: 500;">
@@ -292,7 +291,6 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Disable button
     const submitBtn = document.getElementById('newsletterBtn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Subscribing...';
@@ -325,11 +323,9 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         emailInput.value = '';
       } else {
-        const data = await response.json();
-        throw new Error(data.error || 'Subscription failed');
+        throw new Error('Subscription failed');
       }
     } catch (error) {
-      console.error('Newsletter error:', error);
       statusDiv.innerHTML = `
         <div style="
           padding: 16px 20px;
@@ -349,7 +345,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Allow Enter key
   emailInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       form.dispatchEvent(new Event('submit'));
