@@ -452,3 +452,63 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// ============================================
+// VIDEO MODAL - YouTube Lightbox
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('videoModal');
+  const iframe = document.getElementById('videoIframe');
+  const closeBtn = document.getElementById('closeModal');
+  
+  if (!modal || !iframe || !closeBtn) return;
+
+  // Get all video card links
+  const videoLinks = document.querySelectorAll('.cards a[href*="youtube.com/watch"]');
+
+  videoLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent navigation
+      const videoUrl = this.getAttribute('href');
+      
+      // Convert YouTube URL to embed format
+      const videoId = getYouTubeId(videoUrl);
+      if (videoId) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scroll
+      }
+    });
+  });
+
+  // Close modal function
+  function closeModal() {
+    modal.style.display = 'none';
+    iframe.src = ''; // Stop video
+    document.body.style.overflow = ''; // Restore scroll
+  }
+
+  // Close button
+  closeBtn.addEventListener('click', closeModal);
+
+  // Click outside the video to close
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Escape key to close
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+
+  // Helper function to extract YouTube video ID
+  function getYouTubeId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  }
+});
