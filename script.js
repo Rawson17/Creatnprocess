@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// VIDEO MODAL - YouTube Lightbox
+// VIDEO MODAL - YouTube Lightbox (FIXED)
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
   const modal = document.getElementById('videoModal');
@@ -463,35 +463,47 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!modal || !iframe || !closeBtn) return;
 
+  // Force modal to be centered
+  modal.style.display = 'none';
+  modal.style.justifyContent = 'center';
+  modal.style.alignItems = 'center';
+
   // Get all video card links
-  const videoLinks = document.querySelectorAll('.cards a[href*="youtube.com/watch"]');
+  const videoLinks = document.querySelectorAll('.cards a[href*="youtube.com/watch"], .cards a[href*="youtu.be/"]');
 
   videoLinks.forEach(function(link) {
     link.addEventListener('click', function(e) {
-      e.preventDefault(); // Prevent navigation
-      const videoUrl = this.getAttribute('href');
+      e.preventDefault();
+      e.stopPropagation();
       
-      // Convert YouTube URL to embed format
+      const videoUrl = this.getAttribute('href');
       const videoId = getYouTubeId(videoUrl);
+      
       if (videoId) {
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1`;
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent scroll
+        document.body.style.overflow = 'hidden';
+        // Fix for scrollbar shift
+        document.body.style.paddingRight = '15px';
       }
     });
   });
 
-  // Close modal function
+  // Close function
   function closeModal() {
     modal.style.display = 'none';
-    iframe.src = ''; // Stop video
-    document.body.style.overflow = ''; // Restore scroll
+    iframe.src = '';
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   }
 
   // Close button
-  closeBtn.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    closeModal();
+  });
 
-  // Click outside the video to close
+  // Click outside to close (but not on the video)
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       closeModal();
@@ -505,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Helper function to extract YouTube video ID
+  // Extract YouTube ID - works with all URL formats
   function getYouTubeId(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
